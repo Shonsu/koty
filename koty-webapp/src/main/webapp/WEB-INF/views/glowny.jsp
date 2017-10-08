@@ -4,9 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Głóna strona</title>
 </head>
 <body>
 <h1>Witaj, jesteś na stronie bazy danych kotów</h1>
+<a href="dodaj">Dodaj</a>
+<a href="wypisz">Wypisz</a>
+<a href="szczegoly">Szczegóły</a>
 </body>
 </html>
