@@ -15,32 +15,40 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h4>Podaj Dane kota:</h4>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+		<a href="wypisz">Powrót do listy kotów</a><br/>
+		<a href="dodaj">Dodaj</a><br/>
+		<a href="szczegoly">Szczegóły</a><br/>
+    </div>
+    <div class="col-md-8">
+      	<h4>Podaj Dane kota:</h4>
 
-	<form>
-		<div class="form-group">
-			<label class="form-control-label" for="imie">Imię kota:</label> <input
-				type="text" class="form-control" id="imie" placeholder="Tofik">
-		</div>
-		<div class="form-group">
-			<label class="form-control-label" for="data_urodzenia">Data urodzenia:</label> <input
-				type="text" class="form-control" id="data_urodzenia" placeholder="Tofik">
-		</div>
-		<div class="form-group">
-			<label class="form-control-label" for="waga">Waga:</label> <input
-				type="text" class="form-control" id="waga" placeholder="Tofik">
-		</div>
-		<div class="form-group">
-			<label class="form-control-label" for="opiekun">Imię opiekuna:</label> <input
-				type="text" class="form-control" id="opiekun"
-				placeholder="Tofik">
-		</div>
-		<button type="submit" class="btn btn-primary">Wyślij</button>
-	</form>
+		<form>
+			<div class="form-group">
+				<label class="form-control-label" for="imie">Imię kota:</label> <input
+					type="text" class="form-control" id="imie" placeholder="Tofik">
+			</div>
+			<div class="form-group">
+				<label class="form-control-label" for="data_urodzenia">Data urodzenia:</label> <input
+					type="text" class="form-control" id="data_urodzenia" placeholder="Tofik">
+			</div>
+			<div class="form-group">
+				<label class="form-control-label" for="waga">Waga:</label> <input
+					type="text" class="form-control" id="waga" placeholder="Tofik">
+			</div>
+			<div class="form-group">
+				<label class="form-control-label" for="opiekun">Imię opiekuna:</label> <input
+					type="text" class="form-control" id="opiekun"
+					placeholder="Tofik">
+			</div>
+			<button type="submit" class="btn btn-primary">Wyślij</button>
+		</form>
+    </div>
+  </div>
+</div>
 
-	<a href="wypisz">Powrót do listy kotów</a>
-	<br />
-	
 	<script type="text/javascript" src="${bootstrapjs}"></script> 
 </body>
 </html>

@@ -22,7 +22,7 @@
 			<value>.jsp</value>
 		</property>
 	</bean>
-
+	<mvc:view-controller path="/" view-name="glowny"/>
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<mvc:annotation-driven />
 
