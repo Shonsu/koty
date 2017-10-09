@@ -1,35 +1,65 @@
 package pl.kobietydokodu.koty.controllers;
 
 
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import pl.kobietydokodu.koty.KotDAO;
+import pl.kobietydokodu.koty.domain.Kot;
+import pl.kobietydokodu.koty.dto.KotDTO;
 
 @Controller
 public class KotyController {
 
 	@Autowired
-	private KotDAO kotDao;
+	public KotDAO kotDao;
 	
 	 @RequestMapping("/glowny")
 	    public String glowny() {
 	        return "glowny";
 	 }
-	 
-	 @RequestMapping("/dodaj")
-	    public String dodaj() {
-	        return "dodaj";
-	 }
-	 
+		 
 	 @RequestMapping("/wypisz")
-	    public String wypisz() {
+	    public String wypisz(Model model) {
+		 	model.addAttribute("koty", kotDao.getKoty());
 	        return "wypisz";
 	 }
 	 
 	 @RequestMapping("/szczegoly")
 	    public String szczegoly() {
 	        return "szczegoly";
+	 }
+	 @RequestMapping("/dodaj")
+	    public String dodajFormularz(HttpServletRequest request,@ModelAttribute("kotDto") @Valid KotDTO kotDto, BindingResult result) {
+	        if (request.getMethod().equalsIgnoreCase("POST") || !result.hasErrors()) {
+	            Kot kot = new Kot();
+	            SimpleDateFormat data_ur = new SimpleDateFormat("dd.MM.yyyy");
+	            try {
+					kot.setDataUrodzenia(data_ur.parse(kotDto.getDataUrodzenia()));
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				kot.setImie(kotDto.getImie());
+				kot.setImieOpiekuna(kotDto.getImieOpiekuna());
+				kot.setWaga(kotDto.getWaga());
+				kotDao.dodajKota(kot);
+	            return "redirect:/wypisz";
+	            
+	        } else {
+	            
+	        	return "dodaj";
+	        }
 	 }
 }
