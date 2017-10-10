@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import pl.kobietydokodu.koty.KotDAO;
@@ -36,8 +37,9 @@ public class KotyController {
 	        return "wypisz";
 	 }
 	 
-	 @RequestMapping("/szczegoly")
-	    public String szczegoly() {
+	 @RequestMapping("/szczegoly/{id}")
+	    public String szczegoly(Model model, @PathVariable("id") Integer id) {
+		 model.addAttribute("kot",kotDao.getKoty().get(id));
 	        return "szczegoly";
 	 }
 	 @RequestMapping("/dodaj")
@@ -48,7 +50,6 @@ public class KotyController {
 	            try {
 					kot.setDataUrodzenia(data_ur.parse(kotDto.getDataUrodzenia()));
 				} catch (ParseException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				kot.setImie(kotDto.getImie());
