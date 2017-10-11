@@ -44,7 +44,7 @@ public class KotyController {
 	 }
 	 @RequestMapping("/dodaj")
 	    public String dodajFormularz(HttpServletRequest request,@ModelAttribute("kotDto") @Valid KotDTO kotDto, BindingResult result) {
-	        if (request.getMethod().equalsIgnoreCase("POST") || !result.hasErrors()) {
+	        if (request.getMethod().equalsIgnoreCase("POST") && !result.hasErrors()) {
 	            Kot kot = new Kot();
 	            SimpleDateFormat data_ur = new SimpleDateFormat("dd.MM.yyyy");
 	            try {

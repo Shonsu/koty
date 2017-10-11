@@ -21,8 +21,8 @@ public class Kot {
         return dataUrodzenia;
     }
 
-    public void setDataUrodzenia(Date dataUrodzenia) {
-        this.dataUrodzenia = dataUrodzenia;
+    public void setDataUrodzenia(Date string) {
+        this.dataUrodzenia = string;
     }
 
     public Float getWaga() {

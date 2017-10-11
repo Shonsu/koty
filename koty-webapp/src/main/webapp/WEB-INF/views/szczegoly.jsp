@@ -16,7 +16,7 @@
 <c:set var="url">${pageContext.request.requestURL}</c:set>
 
 <base href="${fn:substring(url, 0, fn:length(url) - fn:length(pageContext.request.requestURI))}${pageContext.request.contextPath}/" />
-<!--   <script>var base = document.getElementsByTagName("base")[0].href;</script> -->
+<!-- <script>var base = document.getElementsByTagName("base")[0].href;</script> -->
 
 <title>Szczegóły kota</title>
 </head>
