@@ -2,6 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,28 +41,28 @@
 							<div class="form-group row">
 								<label class="col-sm-4 col-form-label" for="imie">Imię kota:</label>
 								<div class="col-sm-8">
-									<form:input path="imie" type="text" class="form-control" id="imie" placeholder="Tofik"></form:input>
+									<form:input path="imie" type="text" class="form-control" id="imie" placeholder="Tofik" />
 									<c:if test="${pageContext.request.method=='POST'}"><form:errors path="imie" /></c:if>
 								</div>
 							</div>
 							<div class="form-group row">
 								<label class="col-sm-4 col-form-label" for="data_urodzenia">Data urodzenia:</label>
 								<div class="col-sm-8">
-									<form:input path="dataUrodzenia" type="text" class="form-control" id="data_urodzenia" placeholder="dd.MM.yyyy"></form:input>
+									<form:input path="dataUrodzenia" type="date" class="form-control"  />
 									<c:if test="${pageContext.request.method=='POST'}"><form:errors path="dataUrodzenia" /></c:if>
 								</div>
 							</div>
 							<div class="form-group row">
 								<label class="col-sm-4 col-form-label" for="waga">Waga:</label>
 								<div class="col-sm-8">
-									<form:input path="waga" type="text" class="form-control" id="waga" placeholder="2"></form:input>
+									<form:input path="waga" type="text" class="form-control" id="waga" placeholder="2" />
 									<c:if test="${pageContext.request.method=='POST'}"><form:errors path="waga" /></c:if>
 								</div>
 							</div>
 							<div class="form-group row">
 								<label class="col-sm-4 col-form-label" for="opiekun">Imię opiekuna:</label>
 								<div class="col-sm-8">
-									<form:input path="imieOpiekuna" type="text" class="form-control" id="opiekun" placeholder="Adaś"></form:input>
+									<form:input path="imieOpiekuna" type="text" class="form-control" id="opiekun" placeholder="Adaś" />
 									<c:if test="${pageContext.request.method=='POST'}"><form:errors path="imieOpiekuna" /></c:if>
 								</div>
 							</div>

@@ -1,7 +1,5 @@
 package pl.kobietydokodu.koty.controllers;
 
-
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -25,42 +23,40 @@ public class KotyController {
 
 	@Autowired
 	public KotDAO kotDao;
-	
-	 @RequestMapping("/glowny")
-	    public String glowny() {
-	        return "glowny";
-	 }
-		 
-	 @RequestMapping("/wypisz")
-	    public String wypisz(Model model) {
-		 	model.addAttribute("koty", kotDao.getKoty());
-	        return "wypisz";
-	 }
-	 
-	 @RequestMapping("/szczegoly/{id}")
-	    public String szczegoly(Model model, @PathVariable("id") Integer id) {
-		 model.addAttribute("kot",kotDao.getKoty().get(id));
-	        return "szczegoly";
-	 }
-	 @RequestMapping("/dodaj")
-	    public String dodajFormularz(HttpServletRequest request,@ModelAttribute("kotDto") @Valid KotDTO kotDto, BindingResult result) {
-	        if (request.getMethod().equalsIgnoreCase("POST") && !result.hasErrors()) {
-	            Kot kot = new Kot();
-	            SimpleDateFormat data_ur = new SimpleDateFormat("dd.MM.yyyy");
-	            try {
-					kot.setDataUrodzenia(data_ur.parse(kotDto.getDataUrodzenia()));
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
-				kot.setImie(kotDto.getImie());
-				kot.setImieOpiekuna(kotDto.getImieOpiekuna());
-				kot.setWaga(kotDto.getWaga());
-				kotDao.dodajKota(kot);
-	            return "redirect:/wypisz";
-	            
-	        } else {
-	            
-	        	return "dodaj";
-	        }
-	 }
+
+	@RequestMapping("/glowny")
+	public String glowny() {
+		return "glowny";
+	}
+
+	@RequestMapping("/wypisz")
+	public String wypisz(Model model) {
+		model.addAttribute("koty", kotDao.getKoty());
+		return "wypisz";
+	}
+
+	@RequestMapping("/szczegoly/{id}")
+	public String szczegoly(Model model, @PathVariable("id") Integer id) {
+		model.addAttribute("kot", kotDao.getKoty().get(id));
+		return "szczegoly";
+	}
+
+	@RequestMapping("/dodaj")
+	public String dodajFormularz(HttpServletRequest request, @ModelAttribute("kotDto") @Valid KotDTO kotDto,
+			BindingResult result) {
+		if (request.getMethod().equalsIgnoreCase("POST") && !result.hasErrors()) {
+			Kot kot = new Kot();
+			SimpleDateFormat data_ur = new SimpleDateFormat("yyyy-MM-dd");
+			kot.setDataUrodzenia(kotDto.getDataUrodzenia());
+			kot.setImie(kotDto.getImie());
+			kot.setImieOpiekuna(kotDto.getImieOpiekuna());
+			kot.setWaga(kotDto.getWaga());
+			kotDao.dodajKota(kot);
+			return "redirect:/wypisz";
+
+		} else {
+
+			return "dodaj";
+		}
+	}
 }
