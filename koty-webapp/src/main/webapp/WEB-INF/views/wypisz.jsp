@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,7 +52,7 @@
 							    <tr class='clickable-row' data-href='szczegoly/${loop.index}'>
 							      <th scope="row">${loop.index} ${loop.count}</th>
 							      <td>${element.imie}</td>
-							      <td>${element.dataUrodzenia}</td>
+							      <td><fmt:formatDate  pattern="dd.MM.yyyy" value="${element.dataUrodzenia}" /></td>
 							      <td>${element.waga}</td>
 							      <td>${element.imieOpiekuna}</td>
 							    </tr>

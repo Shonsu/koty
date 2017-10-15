@@ -28,7 +28,7 @@ public class KotDTO {
     private Float waga;
     
     @NotNull(message="Imię nie może być puste")
-    @Size(min=2, max=30)
+    @Size(min=3, max=30)
     private String imieOpiekuna;
 
 	public String getImie() {

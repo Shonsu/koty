@@ -2,6 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,7 +54,7 @@
 							    <tr>
 							      <th scope="row">1</th>
 							      <td>${kot.imie}</td>
-							      <td>${kot.dataUrodzenia}</td>
+							      <td><fmt:formatDate  pattern="dd.MM.yyyy" value="${kot.dataUrodzenia}" /></td>
 							      <td>${kot.waga}</td>
 							      <td>${kot.imieOpiekuna}</td>
 							    </tr>

@@ -55,7 +55,7 @@
 							<div class="form-group row">
 								<label class="col-sm-4 col-form-label" for="waga">Waga:</label>
 								<div class="col-sm-8">
-									<form:input path="waga" type="text" class="form-control" id="waga" placeholder="2" />
+									<form:input path="waga" type="number" min="0" step=".001" class="form-control" id="waga" placeholder="2.000" />
 									<c:if test="${pageContext.request.method=='POST'}"><form:errors path="waga" /></c:if>
 								</div>
 							</div>

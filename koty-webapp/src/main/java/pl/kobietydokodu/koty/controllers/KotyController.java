@@ -1,7 +1,6 @@
 package pl.kobietydokodu.koty.controllers;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+//import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -37,7 +36,7 @@ public class KotyController {
 
 	@RequestMapping("/szczegoly/{id}")
 	public String szczegoly(Model model, @PathVariable("id") Integer id) {
-		model.addAttribute("kot", kotDao.getKoty().get(id));
+		model.addAttribute("kot", kotDao.getKotById(id));
 		return "szczegoly";
 	}
 
@@ -46,7 +45,7 @@ public class KotyController {
 			BindingResult result) {
 		if (request.getMethod().equalsIgnoreCase("POST") && !result.hasErrors()) {
 			Kot kot = new Kot();
-			SimpleDateFormat data_ur = new SimpleDateFormat("yyyy-MM-dd");
+//			SimpleDateFormat data_ur = new SimpleDateFormat("yyyy-MM-dd");
 			kot.setDataUrodzenia(kotDto.getDataUrodzenia());
 			kot.setImie(kotDto.getImie());
 			kot.setImieOpiekuna(kotDto.getImieOpiekuna());
