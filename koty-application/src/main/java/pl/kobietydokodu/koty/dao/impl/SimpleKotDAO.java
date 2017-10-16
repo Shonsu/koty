@@ -1,14 +1,15 @@
-package pl.kobietydokodu.koty;
+package pl.kobietydokodu.koty.dao.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import pl.kobietydokodu.koty.dao.KotDAO;
 import pl.kobietydokodu.koty.domain.Kot;
 
 @Repository
-public class KotDAO {
+public class SimpleKotDAO implements KotDAO{
 
 	List<Kot> koty = new ArrayList<Kot>();
 	

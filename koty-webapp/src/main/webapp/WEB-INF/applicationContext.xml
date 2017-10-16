@@ -22,6 +22,9 @@
 			<value>.jsp</value>
 		</property>
 	</bean>
+	<import resource="Spring-Datasource.xml" />
+	<import resource="Spring-Kot.xml" />
+	
 	<mvc:view-controller path="/" view-name="glowny"/>
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<mvc:annotation-driven />

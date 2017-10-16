@@ -2,6 +2,19 @@ package pl.kobietydokodu.koty.domain;
 
 import java.util.Date;
 
+
+/*
+ * use koty;
+CREATE TABLE koty_table(
+		  `CUST_ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+		  `imie` varchar(30) NOT NULL,
+		  `opiekun` varchar(30) NOT NULL,
+		  `dataUrodzenia` DATE,
+		  `waga` int(10) unsigned NOT NULL,
+		  PRIMARY KEY (`CUST_ID`)
+		) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+*/
+
 public class Kot {
 
     private String imie;

@@ -5,13 +5,14 @@ import java.text.SimpleDateFormat;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+import pl.kobietydokodu.koty.dao.impl.SimpleKotDAO;
 import pl.kobietydokodu.koty.domain.Kot;
 
 public class Interfejs {
 
     static Scanner sc = new Scanner(System.in);
     
-    static KotDAO kotDao = new KotDAO();
+    static SimpleKotDAO kotDao = new SimpleKotDAO();
 
     public static void main(String[] args) {
     	String wyborUzytkownika;
