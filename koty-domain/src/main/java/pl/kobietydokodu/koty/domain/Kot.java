@@ -17,6 +17,7 @@ CREATE TABLE koty_table(
 
 public class Kot {
 
+	private int custId;
     private String imie;
     private Date dataUrodzenia;
     private Float waga;
@@ -53,5 +54,13 @@ public class Kot {
     public void setImieOpiekuna(String imieOpiekuna) {
         this.imieOpiekuna = imieOpiekuna;
     }
+
+	public int getCustId() {
+		return custId;
+	}
+
+	public void setCustId(int custId) {
+		this.custId = custId;
+	}
 
 }

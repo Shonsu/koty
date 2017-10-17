@@ -4,14 +4,9 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-
-
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/koty" />
+		<property name="url" value="jdbc:mysql://localhost:3306/koty?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;verifyServerCertificate=false&amp;useSSL=true" />
 		<property name="username" value="root" />
 		<property name="password" value="malinka12" />
-		<property name="initConnectionSqls"  value="CEST" />
-
 	</bean>
-	
 </beans>

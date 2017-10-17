@@ -46,6 +46,7 @@ public class KotyController {
 		if (request.getMethod().equalsIgnoreCase("POST") && !result.hasErrors()) {
 			Kot kot = new Kot();
 //			SimpleDateFormat data_ur = new SimpleDateFormat("yyyy-MM-dd");
+//			System.out.println("KotDto Ddate : " + kotDto.getDataUrodzenia());
 			kot.setDataUrodzenia(kotDto.getDataUrodzenia());
 			kot.setImie(kotDto.getImie());
 			kot.setImieOpiekuna(kotDto.getImieOpiekuna());
