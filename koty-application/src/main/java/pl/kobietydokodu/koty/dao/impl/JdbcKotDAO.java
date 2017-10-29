@@ -100,4 +100,10 @@ public class JdbcKotDAO implements KotDAO {
 		return null;
 	}
 
+	@Override
+	public void edytujKota(Long idKot) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

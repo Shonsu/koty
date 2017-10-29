@@ -11,8 +11,6 @@ import java.util.Date;
 import javax.validation.constraints.NotNull;
 
 
-
-
 public class KotDTO {
 
     

@@ -1,12 +1,15 @@
 package pl.kobietydokodu.koty.domain;
 
 import java.util.Date;
-
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /*
  * use koty;
 CREATE TABLE koty_table(
-		  `CUST_ID` int(10) unsigned NOT NULL AUTO_INCREMENT,
+		  `CUST_ID` SIGNED BIGINT unsigned NOT NULL AUTO_INCREMENT,
 		  `imie` varchar(30) NOT NULL,
 		  `opiekun` varchar(30) NOT NULL,
 		  `dataUrodzenia` DATE,
@@ -14,10 +17,12 @@ CREATE TABLE koty_table(
 		  PRIMARY KEY (`CUST_ID`)
 		) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 */
-
+@Entity
 public class Kot {
 
-	private int custId;
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+	private Long custId;
     private String imie;
     private Date dataUrodzenia;
     private Float waga;
@@ -55,11 +60,11 @@ public class Kot {
         this.imieOpiekuna = imieOpiekuna;
     }
 
-	public int getCustId() {
+	public Long getCustId() {
 		return custId;
 	}
 
-	public void setCustId(int custId) {
+	public void setCustId(Long custId) {
 		this.custId = custId;
 	}
 
