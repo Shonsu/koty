@@ -1,11 +1,14 @@
 package pl.kobietydokodu.koty.controllers;
 
+
+
 //import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,16 +16,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import pl.kobietydokodu.koty.dao.impl.JpaKotDAO;
 import pl.kobietydokodu.koty.domain.Kot;
 import pl.kobietydokodu.koty.dto.KotDTO;
+
+import pl.kobietydokodu.koty.service.KotServiceImp;
 
 @Controller
 public class KotyController {
 
+	
 	@Autowired
-	public JpaKotDAO kotDao;
-
+	@Qualifier("KotServiceImp")
+	private KotServiceImp kotService;
+	
 	@RequestMapping("/glowny")
 	public String glowny() {
 		return "glowny";
@@ -30,13 +36,13 @@ public class KotyController {
 
 	@RequestMapping("/wypisz")
 	public String wypisz(Model model) {
-		model.addAttribute("koty", kotDao.getKoty());
+		model.addAttribute("koty", kotService.getKoty());
 		return "wypisz";
 	}
 
 	@RequestMapping("/szczegoly/{id}")
 	public String szczegoly(Model model, @PathVariable("id") Integer id) {
-		model.addAttribute("kot", kotDao.getKotById(id));
+		model.addAttribute("kot", kotService.getKotById(id));
 		return "szczegoly";
 	}
 
@@ -51,7 +57,7 @@ public class KotyController {
 			kot.setImie(kotDto.getImie());
 			kot.setImieOpiekuna(kotDto.getImieOpiekuna());
 			kot.setWaga(kotDto.getWaga());
-			kotDao.dodajKota(kot);
+			kotService.dodajKota(kot);
 			return "redirect:/wypisz";
 
 		} else {
