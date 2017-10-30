@@ -24,7 +24,6 @@ public class KotyController {
 
 	
 	@Autowired
-
 	private KotServiceImp kotService;
 	
 	@RequestMapping("/glowny")

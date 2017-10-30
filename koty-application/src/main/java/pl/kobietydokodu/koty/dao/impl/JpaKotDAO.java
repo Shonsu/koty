@@ -11,9 +11,16 @@ import pl.kobietydokodu.koty.domain.Kot;
 @Repository
 public class JpaKotDAO implements KotDAO {
 
-	@PersistenceContext
-	EntityManager entityManager;
-	
+    protected EntityManager entityManager;
+    
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
+    
+    @PersistenceContext
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 	
 	@Override
 	public void dodajKota(Kot kot) {
