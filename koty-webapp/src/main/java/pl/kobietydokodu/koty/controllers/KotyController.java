@@ -15,16 +15,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import pl.kobietydokodu.koty.dao.impl.JdbcKotDAO;
 import pl.kobietydokodu.koty.domain.Kot;
 import pl.kobietydokodu.koty.dto.KotDTO;
-import pl.kobietydokodu.koty.service.KotServiceImp;
 
 @Controller
 public class KotyController {
 
 	
 	@Autowired
-	private KotServiceImp kotService;
+	private JdbcKotDAO kotService;
 	
 	@RequestMapping("/glowny")
 	public String glowny() {
