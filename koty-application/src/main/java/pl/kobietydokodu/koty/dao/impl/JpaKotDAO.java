@@ -14,7 +14,6 @@ public class JpaKotDAO implements KotDAO {
 	@PersistenceContext
 	EntityManager entityManager;
 	
-
 	
 	@Override
 	public void dodajKota(Kot kot) {

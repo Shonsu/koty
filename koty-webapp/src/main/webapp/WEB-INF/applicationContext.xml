@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="
  http://www.springframework.org/schema/mvc 
@@ -9,10 +10,13 @@
  http://www.springframework.org/schema/context 
  http://www.springframework.org/schema/context/spring-context-4.3.xsd
  http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
-
-	<context:component-scan base-package="pl.kobietydokodu" /> <!-- Chcemy automatycznie obsługiwać wszystkie klasy z adnotacjami w tym pakiecie -->
-	<context:annotation-config /> <!-- To na przyszłość, pozwoli nam korzystać z adnotacji także w klasach, które byśmy skonfigurowali ręcznie -->
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<context:component-scan base-package="pl.kobietydokodu" /> <!-- Chcemy automatycznie obsługiwać wszystkie klasy z adnotacjami w tym 
+		pakiecie -->
+	<context:annotation-config /> <!-- To na przyszłość, pozwoli nam korzystać z adnotacji także w klasach, 
+		które byśmy skonfigurowali ręcznie -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
 			<value>/WEB-INF/views/</value>
 		</property>
@@ -21,12 +25,13 @@
 		</property>
 	</bean>
 
-	
-	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" >
+
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="pl.kobietydokodu.domain" />
+		<!-- <property name="packagesToScan" value="pl.kobietydokodu.domain" /> -->
 		<property name="jpaVendorAdapter">
-			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" >
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 				<property name="showSql" value="false" />
 				<property name="databasePlatform" value="org.hibernate.dialect.MySQL5Dialect" />
 			</bean>
@@ -37,14 +42,17 @@
 			</props>
 		</property>
 	</bean>
-	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
-	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+	<bean
+		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+	<bean
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
-	<tx:annotation-driven transaction-manager="transactionManager"/>
+
 	<import resource="Spring-Datasource.xml" />
 	<import resource="Spring-Kot.xml" />
+
 
 	<mvc:view-controller path="/" view-name="glowny" />
 	<mvc:resources mapping="/resources/**" location="/resources/" />
