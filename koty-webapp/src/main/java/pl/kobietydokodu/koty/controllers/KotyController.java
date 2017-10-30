@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import pl.kobietydokodu.koty.domain.Kot;
 import pl.kobietydokodu.koty.dto.KotDTO;
-
 import pl.kobietydokodu.koty.service.KotServiceImp;
 
 @Controller
@@ -26,7 +24,7 @@ public class KotyController {
 
 	
 	@Autowired
-	@Qualifier("KotServiceImp")
+
 	private KotServiceImp kotService;
 	
 	@RequestMapping("/glowny")
