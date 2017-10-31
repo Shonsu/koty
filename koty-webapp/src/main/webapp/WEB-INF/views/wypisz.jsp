@@ -45,16 +45,21 @@
 							      <th>Data urodzenia</th>
 							      <th>Waga</th>
 							      <th>Imię opiekuna</th>
+							      <th></th>
+							      
 							    </tr>
 							  </thead>
 							  <tbody>
 							  <c:forEach var="element" items="${koty}" varStatus="loop">
-							    <tr class='clickable-row' data-href='szczegoly/${element.custId}'>
+							    <%-- <tr class='clickable-row' data-href='szczegoly/${element.custId}'> --%>
+							    <tr>
 							      <th scope="row">${loop.index} / ${loop.count} / ${element.custId}</th>
 							      <td>${element.imie}</td>
 							      <td><fmt:formatDate  pattern="dd.MM.yyyy" value="${element.dataUrodzenia}" /></td>
 							      <td>${element.waga}</td>
 							      <td>${element.imieOpiekuna}</td>
+							      <td><button class="btn btn-info" onclick="location.href='edytuj/${element.custId}'">Update</button>
+							     <button class="btn btn-primary" onclick="location.href='szczegoly/${element.custId}'">Details</button></td>
 							    </tr>
 							    </c:forEach>
 							  </tbody>
@@ -63,13 +68,13 @@
 				</div>
 			</div>
 		</div>
-		<script type="text/javascript">
+<!-- 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
 			    $(".clickable-row").click(function() {
 			        window.location = $(this).data("href");
 			    });
 			});
-		</script>
+		</script> -->
 		<script type="text/javascript" src="${bootstrapjs}"></script>
 </body>
 </html>
