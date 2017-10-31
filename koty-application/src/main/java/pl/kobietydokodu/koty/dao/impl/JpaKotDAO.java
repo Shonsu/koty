@@ -4,25 +4,20 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import pl.kobietydokodu.koty.dao.KotDAO;
 import pl.kobietydokodu.koty.domain.Kot;
 
 @Repository
+@Qualifier("jpaKorDAOBean")
 public class JpaKotDAO implements KotDAO {
 
 	@PersistenceContext
     private EntityManager entityManager;
     
-/*    public EntityManager getEntityManager() {
-        return entityManager;
-    }
-    
-    
-    public void setEntityManager(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
-*/
+
 	
 	@Override
 	public void dodajKota(Kot kot) {

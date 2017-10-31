@@ -24,14 +24,10 @@
 			<value>.jsp</value>
 		</property>
 	</bean>
-<!-- 	<bean id="kotServiceImp" class="pl.kobietydokodu.koty.service.KotServiceImp">
-		<property name="KotDAO" ref="JpaKotDAO" />
-	</bean>
-	<bean id="jpaKotDAO" class="pl.kobietydokodu.koty.dao.impl.JpaKotDAO"/>
- -->
+
 	<bean id="myEmf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="packagesToScan" value="pl.kobietydokodu.domain" />
+		<property name="packagesToScan" value="pl.kobietydokodu" />
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 				<property name="showSql" value="false" />
@@ -52,7 +48,7 @@
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="myEmf" />
 	</bean>
-	<tx:annotation-driven transaction-manager="transactionManager" />
+	<tx:annotation-driven proxy-target-class="true" transaction-manager="transactionManager" />
 
 	<import resource="Spring-Datasource.xml" />
 	<import resource="Spring-Kot.xml" />
