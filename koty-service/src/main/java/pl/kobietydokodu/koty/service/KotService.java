@@ -2,8 +2,6 @@ package pl.kobietydokodu.koty.service;
 
 import java.util.List;
 
-import org.springframework.stereotype.Component;
-
 import pl.kobietydokodu.koty.domain.Kot;
 
 public interface KotService {

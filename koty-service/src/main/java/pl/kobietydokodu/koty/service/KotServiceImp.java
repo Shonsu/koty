@@ -13,7 +13,7 @@ import pl.kobietydokodu.koty.domain.Kot;
 public class KotServiceImp implements KotService {
 	
 	@Autowired
-	@Qualifier("jpaKorDAOBean")
+	@Qualifier("jpaKotDAOBean")
 	private KotDAO kotDao;
 	
 	@Transactional

@@ -2,7 +2,6 @@ package pl.kobietydokodu.koty.dao;
 
 import java.util.List;
 
-import org.springframework.stereotype.Component;
 
 import pl.kobietydokodu.koty.domain.Kot;
 

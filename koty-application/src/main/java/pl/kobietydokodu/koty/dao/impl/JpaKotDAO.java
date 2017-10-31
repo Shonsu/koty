@@ -11,7 +11,7 @@ import pl.kobietydokodu.koty.dao.KotDAO;
 import pl.kobietydokodu.koty.domain.Kot;
 
 @Repository
-@Qualifier("jpaKorDAOBean")
+@Qualifier("jpaKotDAOBean")
 public class JpaKotDAO implements KotDAO {
 
 	@PersistenceContext
