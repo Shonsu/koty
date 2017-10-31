@@ -18,16 +18,15 @@ public class KotServiceImp implements KotService {
 	
 	@Transactional
 	@Override
-	public List<Kot> getKoty() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Kot> getKoty() {	
+		return kotDao.getKoty();
 	}
 
 	@Transactional
 	@Override
 	public Kot getKotById(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		return kotDao.getKotById(id);
 	}
 
 	@Transactional

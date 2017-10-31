@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -26,15 +27,22 @@ public class JpaKotDAO implements KotDAO {
 
 	@Override
 	public List<Kot> getKoty() {
-		// TODO Auto-generated method stub
-
-		return null;
+		
+		Query query = entityManager.createQuery("SELECT k FROM Kot k");
+		@SuppressWarnings("unchecked")
+		List<Kot> koty = (List<Kot>) query.getResultList();
+		
+		return koty;
 	}
 
 	@Override
 	public Kot getKotById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Query query = entityManager.createQuery("SELECT k FROM Kot k WHERE k.custId = :id");
+		query.setParameter("id", Long.valueOf(id));
+		Kot kot = (Kot) query.getSingleResult();
+		
+		return kot;
 	}
 
 	@Override

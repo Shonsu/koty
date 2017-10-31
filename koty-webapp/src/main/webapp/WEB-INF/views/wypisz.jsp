@@ -49,8 +49,8 @@
 							  </thead>
 							  <tbody>
 							  <c:forEach var="element" items="${koty}" varStatus="loop">
-							    <tr class='clickable-row' data-href='szczegoly/${loop.index}'>
-							      <th scope="row">${loop.index} ${loop.count}</th>
+							    <tr class='clickable-row' data-href='szczegoly/${element.custId}'>
+							      <th scope="row">${loop.index} / ${loop.count} / ${element.custId}</th>
 							      <td>${element.imie}</td>
 							      <td><fmt:formatDate  pattern="dd.MM.yyyy" value="${element.dataUrodzenia}" /></td>
 							      <td>${element.waga}</td>
