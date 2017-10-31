@@ -67,7 +67,6 @@ public class KotyController {
 	// http://www.mkyong.com/spring-mvc/spring-mvc-form-handling-example/
 	@RequestMapping(value = "/edytuj/{id}", method = RequestMethod.GET)
 	public String edit(Model model, @PathVariable("id") Integer id) {
-		System.out.println(kotService.getKotById(id).getDataUrodzenia());
 		model.addAttribute("kotDto", kotService.getKotById(id));
 		return "edytuj";
 	}
