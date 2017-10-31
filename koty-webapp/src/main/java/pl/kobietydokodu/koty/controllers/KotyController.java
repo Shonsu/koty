@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pl.kobietydokodu.koty.dao.impl.JdbcKotDAO;
 import pl.kobietydokodu.koty.domain.Kot;
@@ -47,7 +48,7 @@ public class KotyController {
 
 	@RequestMapping("/dodaj")
 	public String dodajFormularz(HttpServletRequest request, @ModelAttribute("kotDto") @Valid KotDTO kotDto,
-			BindingResult result) {
+			BindingResult result, final RedirectAttributes redirectAttributes) {
 		if (request.getMethod().equalsIgnoreCase("POST") && !result.hasErrors()) {
 			Kot kot = new Kot();
 //			SimpleDateFormat data_ur = new SimpleDateFormat("yyyy-MM-dd");
@@ -56,6 +57,13 @@ public class KotyController {
 			kot.setImie(kotDto.getImie());
 			kot.setImieOpiekuna(kotDto.getImieOpiekuna());
 			kot.setWaga(kotDto.getWaga());
+			// Add message to flash scope
+						redirectAttributes.addFlashAttribute("css", "success");
+						if(kot.isNew()){
+						  redirectAttributes.addFlashAttribute("msg", "Kot dodany pomyślnie!");
+						}else{
+						  redirectAttributes.addFlashAttribute("msg", "Kot zaktualizowany pomyślnie!");
+						}
 			kotService.dodajKota(kot);
 			return "redirect:/wypisz";
 
