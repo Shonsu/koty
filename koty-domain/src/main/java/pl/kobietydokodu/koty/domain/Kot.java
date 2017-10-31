@@ -68,4 +68,9 @@ public class Kot {
 		this.custId = custId;
 	}
 
+	public boolean isNew() {
+		return (this.custId == null);
+
+	}
+
 }
