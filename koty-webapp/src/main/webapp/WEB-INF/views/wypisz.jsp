@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,60 +21,66 @@
 	<div class="container">
 		<div class="jumbotron">
 			<h1>Baza kotów</h1>
-			<p>Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile-first projects on
-				the web.</p>
+			<p>Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile-first projects on the web.</p>
 		</div>
 		<div class="row">
 			<div class="col-md-3">
 				<div class="list-group">
-					<a href="#" class="list-group-item active">Menu główne</a>
-					<a href="wypisz" class="list-group-item list-group-item-action">Lista kotów</a>
-					<a href="dodaj"	class="list-group-item list-group-item-action">Dodaj kota</a>
+					<a href="#" class="list-group-item active">Menu główne</a> <a href="wypisz" class="list-group-item list-group-item-action">Lista
+						kotów</a> <a href="dodaj" class="list-group-item list-group-item-action">Dodaj kota</a>
 					<!-- <a href="szczegoly"	class="list-group-item list-group-item-action">Szczegóły</a>
 					<a href="#"	class="list-group-item list-group-item-action disabled">pit pitu</a> -->
 				</div>
-				</div>
-				<div class="col-md-9">
-					<h4>Lista kotów</h4>
-					<div class="container">
-						<table class="table table-sm table-hover">
-							  <thead>
-							    <tr>
-							      <th>#</th>
-							      <th>Imię</th>
-							      <th>Data urodzenia</th>
-							      <th>Waga</th>
-							      <th>Imię opiekuna</th>
-							      <th></th>
-							      
-							    </tr>
-							  </thead>
-							  <tbody>
-							  <c:forEach var="element" items="${koty}" varStatus="loop">
-							    <%-- <tr class='clickable-row' data-href='szczegoly/${element.custId}'> --%>
-							    <tr>
-							      <th scope="row">${loop.index} / ${loop.count} / ${element.custId}</th>
-							      <td>${element.imie}</td>
-							      <td><fmt:formatDate  pattern="dd.MM.yyyy" value="${element.dataUrodzenia}" /></td>
-							      <td>${element.waga}</td>
-							      <td>${element.imieOpiekuna}</td>
-							      <td><button class="btn btn-info" onclick="location.href='edytuj/${element.custId}'">Update</button>
-							     <button class="btn btn-primary" onclick="location.href='szczegoly/${element.custId}'">Details</button></td>
-							    </tr>
-							    </c:forEach>
-							  </tbody>
-						</table>
+			</div>
+			<div class="col-md-9">
+				<c:if test="${not empty msg}">
+					<div class="alert alert-${css} alert-dismissible" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">×</span>
+						</button>
+						<strong>${msg}</strong>
 					</div>
+				</c:if>
+				<h4>Lista kotów</h4>
+				<div class="container">
+					<table class="table table-sm table-hover">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Imię</th>
+								<th>Data urodzenia</th>
+								<th>Waga</th>
+								<th>Imię opiekuna</th>
+								<th></th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="element" items="${koty}" varStatus="loop">
+								<%-- <tr class='clickable-row' data-href='szczegoly/${element.custId}'> --%>
+								<tr>
+									<th scope="row" class="align-middle">${loop.index}/ ${loop.count} / ${element.custId}</th>
+									<td class="align-middle">${element.imie}</td>
+									<td class="align-middle"><fmt:formatDate pattern="dd.MM.yyyy" value="${element.dataUrodzenia}" /></td>
+									<td class="align-middle">${element.waga}</td>
+									<td class="align-middle">${element.imieOpiekuna}</td>
+									<td class="align-middle"><button class="btn btn-info btn-sm" onclick="location.href='edytuj/${element.custId}'">Update</button>
+										<button class="btn btn-primary btn-sm" onclick="location.href='szczegoly/${element.custId}'">Details</button></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
-<!-- 		<script type="text/javascript">
+	</div>
+	<!-- 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
 			    $(".clickable-row").click(function() {
 			        window.location = $(this).data("href");
 			    });
 			});
 		</script> -->
-		<script type="text/javascript" src="${bootstrapjs}"></script>
+	<script type="text/javascript" src="${bootstrapjs}"></script>
 </body>
 </html>
