@@ -8,12 +8,13 @@ import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
-import pl.kobietydokodu.koty.dao.CatService;
+
+import pl.kobietydokodu.koty.dao.CatDAO;
 import pl.kobietydokodu.koty.domain.Cat;
 
 @Repository
 @Qualifier("jpaKotDAOBean")
-public class JpaKotDAO implements CatService {
+public class JpaKotDAO implements CatDAO {
 
 	@PersistenceContext
     private EntityManager entityManager;
@@ -23,6 +24,8 @@ public class JpaKotDAO implements CatService {
 	@Override
 	public void add(Cat kot) {
 		entityManager.persist(kot);
+		entityManager.flush();
+		System.out.println(kot.getCustId());
 	}
 
 	@Override
@@ -40,20 +43,35 @@ public class JpaKotDAO implements CatService {
 		
 		Query query = entityManager.createQuery("SELECT k FROM Cat k WHERE k.custId = :id");
 		query.setParameter("id", Long.valueOf(id));
-		Cat kot = (Cat) query.getSingleResult();
+		Cat kot = null;
+		try {
+			kot = (Cat) query.getSingleResult();
+		} catch (Exception e) {
+			return kot;
+		}
 		
 		return kot;
 	}
 
 	@Override
-	public void edit(Long idKot) {
-		// TODO Auto-generated method stub
+	public void edit(Cat kot) {
+		Query query = entityManager.createQuery("UPDATE koty.cat SET  birthDate = :birthDate, name = :name, owner = :owner, weight = :weight WHERE custId = :where_expression");
+		//custId = :custId,	
+		query.setParameter("birthDate", kot.getBirthDate());
+		query.setParameter("name", kot.getBirthDate());
+		query.setParameter("owner", kot.getBirthDate());
+		query.setParameter("weight", kot.getBirthDate());
+		query.executeUpdate();
+		//entityManager.flush();
+
+		
 
 	}
 
 	@Override
 	public void delete(Long idKot) {
-		// TODO Auto-generated method stub
+		Query query = entityManager.createQuery("DELETE FROM koty.cat WHERE custId=:id");
+		query.setParameter("id", idKot).executeUpdate();
 		
 	}
 
