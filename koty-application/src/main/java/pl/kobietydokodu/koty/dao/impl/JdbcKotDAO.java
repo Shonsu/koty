@@ -10,14 +10,14 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
-import pl.kobietydokodu.koty.dao.KotDAO;
-import pl.kobietydokodu.koty.domain.Kot;
+import pl.kobietydokodu.koty.dao.CatService;
+import pl.kobietydokodu.koty.domain.Cat;
 
-public class JdbcKotDAO implements KotDAO {
+public class JdbcKotDAO implements CatService {
 
 	Connection conn = null;
-	List<Kot> koty;
-	Kot kot;
+	List<Cat> koty;
+	Cat kot;
 
 	@Resource(name = "dataSource")
 	private DataSource dataSource;
@@ -27,7 +27,7 @@ public class JdbcKotDAO implements KotDAO {
 	}
 
 	@Override
-	public void dodajKota(Kot kot) {
+	public void add(Cat kot) {
 		String sql = "INSERT INTO koty_table " + "(imie, opiekun, dataUrodzenia, waga) VALUES (?, ?, ?, ?)";
 
 		conn = null;
@@ -36,11 +36,11 @@ public class JdbcKotDAO implements KotDAO {
 			conn = dataSource.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
 			// ps.setInt(1, kot.getCustId());
-			ps.setString(1, kot.getImie());
-			ps.setString(2, kot.getImieOpiekuna());
+			ps.setString(1, kot.getName());
+			ps.setString(2, kot.getOwner());
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			ps.setString(3, sdf.format(kot.getDataUrodzenia()));
-			ps.setFloat(4, kot.getWaga());
+			ps.setString(3, sdf.format(kot.getBirthDate()));
+			ps.setFloat(4, kot.getWeight());
 			ps.executeUpdate();
 			ps.close();
 
@@ -58,22 +58,22 @@ public class JdbcKotDAO implements KotDAO {
 	}
 
 	@Override
-	public List<Kot> getKoty() {
+	public List<Cat> findAll() {
 		String sql = "SELECT * FROM koty_table";
 
 		conn = null;
-		koty = new ArrayList<Kot>();
+		koty = new ArrayList<Cat>();
 		try {
 			conn = dataSource.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
 
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				kot = new Kot();
-				kot.setImie(rs.getString("imie"));
-				kot.setImieOpiekuna(rs.getString("opiekun"));
-				kot.setDataUrodzenia(rs.getDate("dataUrodzenia"));
-				kot.setWaga(rs.getFloat("waga"));
+				kot = new Cat();
+				kot.setName(rs.getString("imie"));
+				kot.setOwner(rs.getString("opiekun"));
+				kot.setBirthDate(rs.getDate("dataUrodzenia"));
+				kot.setWeight(rs.getFloat("waga"));
 				koty.add(kot);
 			}
 			rs.close();
@@ -95,13 +95,19 @@ public class JdbcKotDAO implements KotDAO {
 	}
 
 	@Override
-	public Kot getKotById(Integer id) {
+	public Cat findById(Integer id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void edytujKota(Long idKot) {
+	public void edit(Long idKot) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Long idKot) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -18,16 +18,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pl.kobietydokodu.koty.dao.impl.JdbcKotDAO;
-import pl.kobietydokodu.koty.domain.Kot;
+import pl.kobietydokodu.koty.domain.Cat;
 import pl.kobietydokodu.koty.dto.KotDTO;
-import pl.kobietydokodu.koty.service.KotServiceImp;
+import pl.kobietydokodu.koty.service.CatServiceImp;
 
 @Controller
 public class KotyController {
 
 	
 	@Autowired
-	private KotServiceImp kotService;
+	private CatServiceImp kotService;
 	
 	@RequestMapping("/glowny")
 	public String glowny() {
@@ -36,13 +36,13 @@ public class KotyController {
 
 	@RequestMapping("/wypisz")
 	public String wypisz(Model model) {
-		model.addAttribute("koty", kotService.getKoty());
+		model.addAttribute("koty", kotService.findAll());
 		return "wypisz";
 	}
 
 	@RequestMapping("/szczegoly/{id}")
 	public String szczegoly(Model model, @PathVariable("id") Integer id) {
-		model.addAttribute("kot", kotService.getKotById(id));
+		model.addAttribute("kot", kotService.findById(id));
 		return "szczegoly";
 	}
 
@@ -50,13 +50,13 @@ public class KotyController {
 	public String dodajFormularz(HttpServletRequest request, @ModelAttribute("kotDto") @Valid KotDTO kotDto,
 			BindingResult result, final RedirectAttributes redirectAttributes) {
 		if (request.getMethod().equalsIgnoreCase("POST") && !result.hasErrors()) {
-			Kot kot = new Kot();
+			Cat kot = new Cat();
 //			SimpleDateFormat data_ur = new SimpleDateFormat("yyyy-MM-dd");
 //			System.out.println("KotDto Ddate : " + kotDto.getDataUrodzenia());
-			kot.setDataUrodzenia(kotDto.getDataUrodzenia());
-			kot.setImie(kotDto.getImie());
-			kot.setImieOpiekuna(kotDto.getImieOpiekuna());
-			kot.setWaga(kotDto.getWaga());
+			kot.setBirthDate(kotDto.getDataUrodzenia());
+			kot.setName(kotDto.getImie());
+			kot.setOwner(kotDto.getImieOpiekuna());
+			kot.setWeight(kotDto.getWaga());
 			// Add message to flash scope
 						redirectAttributes.addFlashAttribute("css", "success");
 						if(kot.isNew()){
@@ -64,7 +64,7 @@ public class KotyController {
 						}else{
 						  redirectAttributes.addFlashAttribute("msg", "Kot zaktualizowany pomyślnie!");
 						}
-			kotService.dodajKota(kot);
+			kotService.add(kot);
 			return "redirect:/wypisz";
 
 		} else {
@@ -75,7 +75,7 @@ public class KotyController {
 	// http://www.mkyong.com/spring-mvc/spring-mvc-form-handling-example/
 	@RequestMapping(value = "/edytuj/{id}", method = RequestMethod.GET)
 	public String edit(Model model, @PathVariable("id") Integer id) {
-		model.addAttribute("kotDto", kotService.getKotById(id));
+		model.addAttribute("kotDto", kotService.findById(id));
 		return "edytuj";
 	}
 }

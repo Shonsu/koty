@@ -7,40 +7,46 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.kobietydokodu.koty.dao.KotDAO;
-import pl.kobietydokodu.koty.domain.Kot;
+import pl.kobietydokodu.koty.dao.CatService;
+import pl.kobietydokodu.koty.domain.Cat;
 @Service
-public class KotServiceImp implements KotService {
+public class CatServiceImp implements CatService {
 	
 	@Autowired
 	@Qualifier("jpaKotDAOBean")
-	private KotDAO kotDao;
+	private CatService kotDao;
 	
 	@Transactional
 	@Override
-	public List<Kot> getKoty() {	
-		return kotDao.getKoty();
+	public List<Cat> findAll() {	
+		return kotDao.findAll();
 	}
 
 	@Transactional
 	@Override
-	public Kot getKotById(Integer id) {
+	public Cat findById(Integer id) {
 		// TODO Auto-generated method stub
-		return kotDao.getKotById(id);
+		return kotDao.findById(id);
 	}
 
 	@Transactional
 	@Override
-	public void dodajKota(Kot kot) {
+	public void add(Cat kot) {
 		// TODO Auto-generated method stub
-		kotDao.dodajKota(kot);
+		kotDao.add(kot);
 	}
 
 	@Transactional
 	@Override
-	public void edytujKota(Long idKot) {
+	public void edit(Long idKot) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void delete(Long idKot) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

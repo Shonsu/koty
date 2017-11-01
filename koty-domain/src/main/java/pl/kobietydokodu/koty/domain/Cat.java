@@ -18,46 +18,46 @@ CREATE TABLE koty_table(
 		) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 */
 @Entity
-public class Kot {
+public class Cat {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private Long custId;
-    private String imie;
-    private Date dataUrodzenia;
-    private Float waga;
-    private String imieOpiekuna;
+    private String name;
+    private Date birthDate;
+    private Float weight;
+    private String owner;
 
-    public String getImie() {
-        return imie;
+	public String getName() {
+        return name;
     }
 
-    public void setImie(String imie) {
-        this.imie = imie;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Date getDataUrodzenia() {
-        return dataUrodzenia;
+    public Date getBirthDate() {
+        return birthDate;
     }
 
-    public void setDataUrodzenia(Date string) {
-        this.dataUrodzenia = string;
+    public void setBirthDate(Date string) {
+        this.birthDate = string;
     }
 
-    public Float getWaga() {
-        return waga;
+    public Float getWeight() {
+        return weight;
     }
 
-    public void setWaga(Float waga) {
-        this.waga = waga;
+    public void setWeight(Float weight) {
+        this.weight = weight;
     }
 
-    public String getImieOpiekuna() {
-        return imieOpiekuna;
+    public String getOwner() {
+        return owner;
     }
 
-    public void setImieOpiekuna(String imieOpiekuna) {
-        this.imieOpiekuna = imieOpiekuna;
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 
 	public Long getCustId() {

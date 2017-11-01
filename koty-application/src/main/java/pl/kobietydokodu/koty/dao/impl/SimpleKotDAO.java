@@ -5,23 +5,23 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import pl.kobietydokodu.koty.dao.KotDAO;
-import pl.kobietydokodu.koty.domain.Kot;
+import pl.kobietydokodu.koty.dao.CatService;
+import pl.kobietydokodu.koty.domain.Cat;
 
 @Repository
-public class SimpleKotDAO implements KotDAO{
+public class SimpleKotDAO implements CatService{
 
-	List<Kot> koty = new ArrayList<Kot>();
+	List<Cat> koty = new ArrayList<Cat>();
 	
-	public void dodajKota(Kot kot) {
+	public void add(Cat kot) {
 		koty.add(kot);
 	}
 	
-	public List<Kot> getKoty() {
+	public List<Cat> findAll() {
 		return koty;
 	}
 	
-	public Kot getKotById(Integer id) {
+	public Cat findById(Integer id) {
 		if (id<koty.size()) {
 			return koty.get(id);
 		} else {
@@ -30,7 +30,13 @@ public class SimpleKotDAO implements KotDAO{
 	}
 
 	@Override
-	public void edytujKota(Long idKot) {
+	public void edit(Long idKot) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(Long idKot) {
 		// TODO Auto-generated method stub
 		
 	}
