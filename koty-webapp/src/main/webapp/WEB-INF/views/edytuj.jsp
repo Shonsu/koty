@@ -41,32 +41,32 @@
 					<div class="container">
 						<form:form modelAttribute="kotDto" method="post">
 							<div class="form-group row">
-								<label class="col-sm-4 col-form-label" for="imie">Imię kota:</label>
+								<label class="col-sm-4 col-form-label" for="name">Imię kota:</label>
 								<div class="col-sm-8">
-									<form:input path="imie" type="text" class="form-control" id="imie" />
-									<c:if test="${pageContext.request.method=='POST'}"><form:errors path="imie" /></c:if>
+									<form:input path="name" type="text" class="form-control" id="name" />
+									<c:if test="${pageContext.request.method=='POST'}"><form:errors path="name" /></c:if>
 								</div>
 							</div>
 							<div class="form-group row">
-								<label class="col-sm-4 col-form-label" for="data_urodzenia">Data urodzenia:</label>
+								<label class="col-sm-4 col-form-label" for="birthDate">Data urodzenia:</label>
 								<div class="col-sm-8">
-								<fmt:formatDate value="${kotDto.dataUrodzenia}" pattern="yyyy-MM-dd" var="formattedDate"/>
-									<form:input path="dataUrodzenia" type="date" class="form-control" value="${formattedDate}" />
-									<c:if test="${pageContext.request.method=='POST'}"><form:errors path="dataUrodzenia" /></c:if>
+								<fmt:formatDate value="${kotDto.birthDate}" pattern="yyyy-MM-dd" var="formattedDate"/>
+									<form:input path="birthDate" type="date" class="form-control" value="${formattedDate}" />
+									<c:if test="${pageContext.request.method=='POST'}"><form:errors path="birthDate" /></c:if>
 								</div>
 							</div>
 							<div class="form-group row">
-								<label class="col-sm-4 col-form-label" for="waga">Waga:</label>
+								<label class="col-sm-4 col-form-label" for="weight">Waga:</label>
 								<div class="col-sm-8">
-									<form:input path="waga" type="number" min="0" step=".001" class="form-control" id="waga" />
-									<c:if test="${pageContext.request.method=='POST'}"><form:errors path="waga" /></c:if>
+									<form:input path="weight" type="number" min="0" step=".001" class="form-control" id="weight" />
+									<c:if test="${pageContext.request.method=='POST'}"><form:errors path="weight" /></c:if>
 								</div>
 							</div>
 							<div class="form-group row">
-								<label class="col-sm-4 col-form-label" for="opiekun">Imię opiekuna:</label>
+								<label class="col-sm-4 col-form-label" for="owner">Imię opiekuna:</label>
 								<div class="col-sm-8">
-									<form:input path="imieOpiekuna" type="text" class="form-control" id="opiekun" />
-									<c:if test="${pageContext.request.method=='POST'}"><form:errors path="imieOpiekuna" /></c:if>
+									<form:input path="owner" type="text" class="form-control" id="owner" />
+									<c:if test="${pageContext.request.method=='POST'}"><form:errors path="owner" /></c:if>
 								</div>
 							</div>
 							<div class="form-group row">

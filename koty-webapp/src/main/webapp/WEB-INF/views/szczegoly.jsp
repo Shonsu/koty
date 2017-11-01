@@ -52,11 +52,11 @@
 							  <tbody>
 							  
 							    <tr>
-							      <th scope="row">1</th>
-							      <td>${kot.imie}</td>
-							      <td><fmt:formatDate  pattern="dd.MM.yyyy" value="${kot.dataUrodzenia}" /></td>
-							      <td>${kot.waga}</td>
-							      <td>${kot.imieOpiekuna}</td>
+							      <th scope="row">${kot.custId}</th>
+							      <td>${kot.name}</td>
+							      <td><fmt:formatDate  pattern="dd.MM.yyyy" value="${kot.birthDate}" /></td>
+							      <td>${kot.weight}</td>
+							      <td>${kot.owner}</td>
 							    </tr>
 							    
 							  </tbody>

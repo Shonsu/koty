@@ -6,10 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-/*
+/* for jdbc
  * use koty;
 CREATE TABLE koty_table(
-		  `CUST_ID` SIGNED BIGINT unsigned NOT NULL AUTO_INCREMENT,
+		  `CUST_ID` BIGINT unsigned NOT NULL AUTO_INCREMENT,
 		  `imie` varchar(30) NOT NULL,
 		  `opiekun` varchar(30) NOT NULL,
 		  `dataUrodzenia` DATE,

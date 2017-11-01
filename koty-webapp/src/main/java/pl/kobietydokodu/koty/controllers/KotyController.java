@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import pl.kobietydokodu.koty.dao.impl.JdbcKotDAO;
+import pl.kobietydokodu.koty.dao.impl.JdbcCatDAO;
 import pl.kobietydokodu.koty.domain.Cat;
 import pl.kobietydokodu.koty.dto.KotDTO;
 import pl.kobietydokodu.koty.service.CatServiceImp;
@@ -53,10 +53,10 @@ public class KotyController {
 			Cat kot = new Cat();
 //			SimpleDateFormat data_ur = new SimpleDateFormat("yyyy-MM-dd");
 //			System.out.println("KotDto Ddate : " + kotDto.getDataUrodzenia());
-			kot.setBirthDate(kotDto.getDataUrodzenia());
-			kot.setName(kotDto.getImie());
-			kot.setOwner(kotDto.getImieOpiekuna());
-			kot.setWeight(kotDto.getWaga());
+			kot.setBirthDate(kotDto.getBirthDate());
+			kot.setName(kotDto.getName());
+			kot.setOwner(kotDto.getOwner());
+			kot.setWeight(kotDto.getWeight());
 			// Add message to flash scope
 						redirectAttributes.addFlashAttribute("css", "success");
 						if(kot.isNew()){

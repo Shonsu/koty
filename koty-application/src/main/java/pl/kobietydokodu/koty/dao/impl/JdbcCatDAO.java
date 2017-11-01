@@ -13,11 +13,11 @@ import javax.sql.DataSource;
 import pl.kobietydokodu.koty.dao.CatService;
 import pl.kobietydokodu.koty.domain.Cat;
 
-public class JdbcKotDAO implements CatService {
+public class JdbcCatDAO implements CatService {
 
 	Connection conn = null;
 	List<Cat> koty;
-	Cat kot;
+	Cat result;
 
 	@Resource(name = "dataSource")
 	private DataSource dataSource;
@@ -69,12 +69,13 @@ public class JdbcKotDAO implements CatService {
 
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				kot = new Cat();
-				kot.setName(rs.getString("imie"));
-				kot.setOwner(rs.getString("opiekun"));
-				kot.setBirthDate(rs.getDate("dataUrodzenia"));
-				kot.setWeight(rs.getFloat("waga"));
-				koty.add(kot);
+				result = new Cat();
+				result.setCustId(Long.valueOf("CUST_ID"));
+				result.setName(rs.getString("imie"));
+				result.setOwner(rs.getString("opiekun"));
+				result.setBirthDate(rs.getDate("dataUrodzenia"));
+				result.setWeight(rs.getFloat("waga"));
+				koty.add(result);
 			}
 			rs.close();
 			ps.close();
@@ -96,8 +97,37 @@ public class JdbcKotDAO implements CatService {
 
 	@Override
 	public Cat findById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "SELECT * FROM koty_table where CUST_IR = " + id;
+
+		conn = null;
+		result = new Cat();
+		try {
+			conn = dataSource.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				result.setCustId(Long.valueOf("CUST_ID"));
+				result.setName(rs.getString("imie"));
+				result.setOwner(rs.getString("opiekun"));
+				result.setBirthDate(rs.getDate("dataUrodzenia"));
+				result.setWeight(rs.getFloat("waga"));
+			}
+			rs.close();
+			ps.close();
+			return result;
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
 	}
 
 	@Override

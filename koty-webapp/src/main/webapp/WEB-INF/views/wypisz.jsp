@@ -60,10 +60,10 @@
 								<%-- <tr class='clickable-row' data-href='szczegoly/${element.custId}'> --%>
 								<tr>
 									<th scope="row" class="align-middle">${loop.index}/ ${loop.count} / ${element.custId}</th>
-									<td class="align-middle">${element.imie}</td>
-									<td class="align-middle"><fmt:formatDate pattern="dd.MM.yyyy" value="${element.dataUrodzenia}" /></td>
-									<td class="align-middle">${element.waga}</td>
-									<td class="align-middle">${element.imieOpiekuna}</td>
+									<td class="align-middle">${element.name}</td>
+									<td class="align-middle"><fmt:formatDate pattern="dd.MM.yyyy" value="${element.birthDate}" /></td>
+									<td class="align-middle">${element.weight}</td>
+									<td class="align-middle">${element.owner}</td>
 									<td class="align-middle"><button class="btn btn-info btn-sm" onclick="location.href='edytuj/${element.custId}'">Update</button>
 										<button class="btn btn-primary btn-sm" onclick="location.href='szczegoly/${element.custId}'">Details</button></td>
 								</tr>
