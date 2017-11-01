@@ -10,10 +10,10 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
-import pl.kobietydokodu.koty.dao.CatService;
+import pl.kobietydokodu.koty.dao.CatDAO;
 import pl.kobietydokodu.koty.domain.Cat;
 
-public class JdbcCatDAO implements CatService {
+public class JdbcCatDAO implements CatDAO {
 
 	Connection conn = null;
 	List<Cat> koty;
@@ -132,7 +132,7 @@ public class JdbcCatDAO implements CatService {
 	}
 
 	@Override
-	public void edit(Long idKot) {
+	public void edit(Cat kot) {
 		// TODO Auto-generated method stub
 		
 	}

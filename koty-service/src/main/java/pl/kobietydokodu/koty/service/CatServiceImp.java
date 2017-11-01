@@ -7,14 +7,14 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.kobietydokodu.koty.dao.CatService;
+import pl.kobietydokodu.koty.dao.CatDAO;
 import pl.kobietydokodu.koty.domain.Cat;
 @Service
-public class CatServiceImp implements CatService {
+public class CatServiceImp implements CatDAO {
 	
 	@Autowired
 	@Qualifier("jpaKotDAOBean")
-	private CatService kotDao;
+	private CatDAO kotDao;
 	
 	@Transactional
 	@Override
@@ -38,7 +38,7 @@ public class CatServiceImp implements CatService {
 
 	@Transactional
 	@Override
-	public void edit(Long idKot) {
+	public void edit(Cat kot) {
 		// TODO Auto-generated method stub
 
 	}

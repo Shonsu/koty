@@ -5,11 +5,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import pl.kobietydokodu.koty.dao.CatService;
+import pl.kobietydokodu.koty.dao.CatDAO;
 import pl.kobietydokodu.koty.domain.Cat;
 
 @Repository
-public class SimpleKotDAO implements CatService{
+public class SimpleKotDAO implements CatDAO{
 
 	List<Cat> koty = new ArrayList<Cat>();
 	
@@ -30,7 +30,7 @@ public class SimpleKotDAO implements CatService{
 	}
 
 	@Override
-	public void edit(Long idKot) {
+	public void edit(Cat kot) {
 		// TODO Auto-generated method stub
 		
 	}
