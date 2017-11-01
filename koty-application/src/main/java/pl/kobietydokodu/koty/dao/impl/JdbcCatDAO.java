@@ -28,7 +28,7 @@ public class JdbcCatDAO implements CatService {
 
 	@Override
 	public void add(Cat kot) {
-		String sql = "INSERT INTO koty_table " + "(imie, opiekun, dataUrodzenia, waga) VALUES (?, ?, ?, ?)";
+		String sql = "INSERT INTO koty.koty_table " + "(imie, opiekun, dataUrodzenia, waga) VALUES (?, ?, ?, ?)";
 
 		conn = null;
 
@@ -59,7 +59,7 @@ public class JdbcCatDAO implements CatService {
 
 	@Override
 	public List<Cat> findAll() {
-		String sql = "SELECT * FROM koty_table";
+		String sql = "SELECT * FROM koty.koty_table";
 
 		conn = null;
 		koty = new ArrayList<Cat>();
@@ -70,7 +70,8 @@ public class JdbcCatDAO implements CatService {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				result = new Cat();
-				result.setCustId(Long.valueOf("CUST_ID"));
+				System.out.println(rs.getString("imie"));
+				result.setCustId(rs.getLong("CUST_ID"));
 				result.setName(rs.getString("imie"));
 				result.setOwner(rs.getString("opiekun"));
 				result.setBirthDate(rs.getDate("dataUrodzenia"));
@@ -97,7 +98,7 @@ public class JdbcCatDAO implements CatService {
 
 	@Override
 	public Cat findById(Integer id) {
-		String sql = "SELECT * FROM koty_table where CUST_IR = " + id;
+		String sql = "SELECT * FROM koty_table where CUST_ID = " + id;
 
 		conn = null;
 		result = new Cat();
@@ -107,7 +108,7 @@ public class JdbcCatDAO implements CatService {
 
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				result.setCustId(Long.valueOf("CUST_ID"));
+				result.setCustId(rs.getLong("CUST_ID"));
 				result.setName(rs.getString("imie"));
 				result.setOwner(rs.getString("opiekun"));
 				result.setBirthDate(rs.getDate("dataUrodzenia"));
