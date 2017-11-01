@@ -15,7 +15,7 @@ public class KotDTO {
 
     
     @NotNull(message="Imię nie może być puste")
-    @Size(min=2, max=30)
+    @Size(min=2, max=30, message = "Długość musi być od 2 do 30 zanków")
     private String name;
     
     private Long custId;
@@ -28,7 +28,7 @@ public class KotDTO {
     private Float weight;
     
     @NotNull(message="Imię nie może być puste")
-    @Size(min=3, max=30)
+    @Size(min=3, max=30, message = "Długość musi być od 3 do 30 zanków")
     private String owner;
 
 	public String getName() {
