@@ -2,6 +2,8 @@ package pl.kobietydokodu.koty.controllers;
 
 
 
+import java.util.TimeZone;
+
 //import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,17 +19,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import pl.kobietydokodu.koty.dao.impl.JdbcCatDAO;
 import pl.kobietydokodu.koty.domain.Cat;
 import pl.kobietydokodu.koty.dto.KotDTO;
-import pl.kobietydokodu.koty.service.CatServiceImp;
+import pl.kobietydokodu.koty.service.CatService;
 
 @Controller
 public class KotyController {
 
+	static {
+	    TimeZone.setDefault(TimeZone.getTimeZone("UTC")); //bez tego data zapisywana w bazie danych była cofnięta o jeden dzień.  
+	  }
 	
 	@Autowired
-	private CatServiceImp kotService;
+	private CatService kotService;
 	
 	@RequestMapping("/glowny")
 	public String glowny() {
@@ -51,9 +55,17 @@ public class KotyController {
 			BindingResult result, final RedirectAttributes redirectAttributes) {
 		if (request.getMethod().equalsIgnoreCase("POST") && !result.hasErrors()) {
 			Cat kot = new Cat();
-//			SimpleDateFormat data_ur = new SimpleDateFormat("yyyy-MM-dd");
-//			System.out.println("KotDto Ddate : " + kotDto.getDataUrodzenia());
-			kot.setBirthDate(kotDto.getBirthDate());
+		    java.util.Date utilDate = new java.util.Date();
+		    utilDate = kotDto.getBirthDate();
+	
+		    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+		   
+		    System.out.println("birth date: " + kotDto.getBirthDate());
+			System.out.println("util date: " + utilDate);
+			System.out.println("SQL date: " + sqlDate);
+			// java.sql.Date sqlDate = new java.sql.Date(kotDto.getBirthDate());
+			kot.setBirthDate(sqlDate);
+			
 			kot.setName(kotDto.getName());
 			kot.setOwner(kotDto.getOwner());
 			kot.setWeight(kotDto.getWeight());
