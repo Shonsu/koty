@@ -8,8 +8,7 @@
 </head>
 <body>
 <h1>Witaj, jesteś na stronie bazy danych kotów</h1>
-<a href="dodaj">Dodaj</a>
-<a href="wypisz">Wypisz</a>
-<a href="szczegoly">Szczegóły</a>
+<a href="cats/add">Dodaj</a>
+<a href="wypisz">Wypisz Koty</a>
 </body>
 </html>

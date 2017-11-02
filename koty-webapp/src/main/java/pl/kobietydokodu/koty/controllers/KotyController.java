@@ -100,28 +100,28 @@ public class KotyController {
 		return "cats/catform";
 
 	}
+	
 	@RequestMapping(value = "/cats", method = RequestMethod.POST)
-	public String edit(@ModelAttribute("catDto") @Valid KotDTO catDto,
+	public String saveOrUpdate(@ModelAttribute("catDto") @Valid KotDTO catDto,
 			BindingResult result, Model model,
 			final RedirectAttributes redirectAttributes) {
 
 		//logger.debug("saveOrUpdateUser() : {}", user);
-		System.out.println("/cats");
 		
 		if (result.hasErrors()) {
 			//populateDefaultModel(model);
 			return "cats/catform";
 		} else {
 			
-			System.out.println("new cat etc cuystid " + catDto.getCustId());
 			
 			Cat cat = new Cat();
-			
+			// convert from util (KotDto) to sql date (Cat)
 		    java.util.Date utilDate = new java.util.Date();
 		    utilDate = catDto.getBirthDate();
 		    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-		    cat.setCustId(catDto.getCustId());
 		    cat.setBirthDate(sqlDate);
+		    
+		    cat.setCustId(catDto.getCustId());
 		    cat.setName(catDto.getName());
 		    cat.setOwner(catDto.getOwner());
 		    cat.setWeight(catDto.getWeight());
@@ -129,20 +129,28 @@ public class KotyController {
 			// Add message to flash scope
 			redirectAttributes.addFlashAttribute("css", "success");
 			if(cat.isNew()){
+				catService.add(cat);
 			  redirectAttributes.addFlashAttribute("msg", "Cat added successfully!");
 			}else{
+				catService.edit(cat);
 			  redirectAttributes.addFlashAttribute("msg", "Cat updated successfully!");
 			}
-			System.out.println("before edit cat");
-			catService.edit(cat);
-			System.out.println("after edit cat");
+
 			// POST/REDIRECT/GET
-			//return "redirect:/szczegoly/" + cat.getCustId();
+			return "redirect:/szczegoly/" + cat.getCustId();
 
 			// POST/FORWARD/GET
-			 return "wypisz";
+			 //return "wypisz";
 
 		}
+
+	}
+	
+	@RequestMapping(value = "/cats/add", method = RequestMethod.GET)
+	public String showAddCatForm(@ModelAttribute("catDto") @Valid KotDTO catDto,
+			BindingResult result, Model model) {
+
+		return "cats/catform";
 
 	}
 }
