@@ -64,7 +64,9 @@
 									<td class="align-middle"><fmt:formatDate pattern="dd.MM.yyyy" value="${element.birthDate}" /></td>
 									<td class="align-middle">${element.weight}</td>
 									<td class="align-middle">${element.owner}</td>
-									<td class="align-middle"><button class="btn btn-info btn-sm" onclick="location.href='edytuj/${element.custId}'">Update</button>
+									<td class="align-middle">
+									<spring:url value="/cats/${element.custId}/update" var="updateUrl" />
+									<button class="btn btn-info btn-sm" onclick="location.href='${updateUrl}'">Update</button>
 										<button class="btn btn-primary btn-sm" onclick="location.href='szczegoly/${element.custId}'">Details</button></td>
 								</tr>
 							</c:forEach>

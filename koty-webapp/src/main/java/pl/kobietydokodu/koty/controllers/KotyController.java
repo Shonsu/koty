@@ -31,7 +31,7 @@ public class KotyController {
 	  }
 	
 	@Autowired
-	private CatService kotService;
+	private CatService catService;
 	
 	@RequestMapping("/glowny")
 	public String glowny() {
@@ -40,32 +40,28 @@ public class KotyController {
 
 	@RequestMapping("/wypisz")
 	public String wypisz(Model model) {
-		model.addAttribute("koty", kotService.findAll());
+		model.addAttribute("koty", catService.findAll());
 		return "wypisz";
 	}
 
 	@RequestMapping("/szczegoly/{id}")
 	public String szczegoly(Model model, @PathVariable("id") Integer id) {
-		model.addAttribute("kot", kotService.findById(id));
+		model.addAttribute("kot", catService.findById(id));
 		return "szczegoly";
 	}
 
 	@RequestMapping("/dodaj")
 	public String dodajFormularz(HttpServletRequest request, @ModelAttribute("kotDto") @Valid KotDTO kotDto,
 			BindingResult result, final RedirectAttributes redirectAttributes) {
+		
 		if (request.getMethod().equalsIgnoreCase("POST") && !result.hasErrors()) {
 			Cat kot = new Cat();
+			
 		    java.util.Date utilDate = new java.util.Date();
 		    utilDate = kotDto.getBirthDate();
-	
 		    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-		   
-		    System.out.println("birth date: " + kotDto.getBirthDate());
-			System.out.println("util date: " + utilDate);
-			System.out.println("SQL date: " + sqlDate);
-			// java.sql.Date sqlDate = new java.sql.Date(kotDto.getBirthDate());
+		    
 			kot.setBirthDate(sqlDate);
-			
 			kot.setName(kotDto.getName());
 			kot.setOwner(kotDto.getOwner());
 			kot.setWeight(kotDto.getWeight());
@@ -76,7 +72,8 @@ public class KotyController {
 						}else{
 						  redirectAttributes.addFlashAttribute("msg", "Kot zaktualizowany pomyślnie!");
 						}
-			kotService.add(kot);
+			
+			catService.add(kot);
 			return "redirect:/wypisz";
 
 		} else {
@@ -87,7 +84,65 @@ public class KotyController {
 	// http://www.mkyong.com/spring-mvc/spring-mvc-form-handling-example/
 	@RequestMapping(value = "/edytuj/{id}", method = RequestMethod.GET)
 	public String edit(Model model, @PathVariable("id") Integer id) {
-		model.addAttribute("kotDto", kotService.findById(id));
+		model.addAttribute("kotDto", catService.findById(id));
 		return "edytuj";
+	}
+	
+	// show update form
+	@RequestMapping(value = "/cats/{id}/update", method = RequestMethod.GET)
+	public String showUpdateCatForm(@PathVariable("id") int id, Model model) {
+		//logger.debug("showUpdateUserForm() : {}", id);
+		Cat cat = catService.findById(id);
+		model.addAttribute("catDto", cat);
+
+		//populateDefaultModel(model);
+
+		return "cats/catform";
+
+	}
+	@RequestMapping(value = "/cats", method = RequestMethod.POST)
+	public String edit(@ModelAttribute("catDto") @Valid KotDTO catDto,
+			BindingResult result, Model model,
+			final RedirectAttributes redirectAttributes) {
+
+		//logger.debug("saveOrUpdateUser() : {}", user);
+		System.out.println("/cats");
+		
+		if (result.hasErrors()) {
+			//populateDefaultModel(model);
+			return "cats/catform";
+		} else {
+			
+			System.out.println("new cat etc cuystid " + catDto.getCustId());
+			
+			Cat cat = new Cat();
+			
+		    java.util.Date utilDate = new java.util.Date();
+		    utilDate = catDto.getBirthDate();
+		    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+		    cat.setCustId(catDto.getCustId());
+		    cat.setBirthDate(sqlDate);
+		    cat.setName(catDto.getName());
+		    cat.setOwner(catDto.getOwner());
+		    cat.setWeight(catDto.getWeight());
+			
+			// Add message to flash scope
+			redirectAttributes.addFlashAttribute("css", "success");
+			if(cat.isNew()){
+			  redirectAttributes.addFlashAttribute("msg", "Cat added successfully!");
+			}else{
+			  redirectAttributes.addFlashAttribute("msg", "Cat updated successfully!");
+			}
+			System.out.println("before edit cat");
+			catService.edit(cat);
+			System.out.println("after edit cat");
+			// POST/REDIRECT/GET
+			//return "redirect:/szczegoly/" + cat.getCustId();
+
+			// POST/FORWARD/GET
+			 return "wypisz";
+
+		}
+
 	}
 }

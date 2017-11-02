@@ -40,6 +40,7 @@ public class CatServiceImp implements CatService {
 	@Override
 	public void edit(Cat kot) {
 		// TODO Auto-generated method stub
+		kotDao.edit(kot);
 
 	}
 
