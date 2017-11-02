@@ -24,8 +24,10 @@ public class JpaKotDAO implements CatDAO {
 	@Override
 	public void add(Cat kot) {
 		entityManager.persist(kot);
+
+		System.out.println("before flush: " + kot.getBirthDate());
 		entityManager.flush();
-		System.out.println(kot.getCustId());
+		System.out.println("after flush: " + kot.getBirthDate());
 	}
 
 	@Override
@@ -58,9 +60,9 @@ public class JpaKotDAO implements CatDAO {
 		Query query = entityManager.createQuery("UPDATE koty.cat SET  birthDate = :birthDate, name = :name, owner = :owner, weight = :weight WHERE custId = :where_expression");
 		//custId = :custId,	
 		query.setParameter("birthDate", kot.getBirthDate());
-		query.setParameter("name", kot.getBirthDate());
-		query.setParameter("owner", kot.getBirthDate());
-		query.setParameter("weight", kot.getBirthDate());
+		query.setParameter("name", kot.getName());
+		query.setParameter("owner", kot.getOwner());
+		query.setParameter("weight", kot.getWeight());
 		query.executeUpdate();
 		//entityManager.flush();
 

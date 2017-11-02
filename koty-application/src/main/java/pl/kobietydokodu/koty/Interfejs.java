@@ -76,11 +76,11 @@ public class Interfejs {
             System.out.print("Podaj datę urodzenia kota w formacie RRRR.MM.DD: ");
             dataUrodzeniaWczytana = getUserInput();
             if (wzorzecDaty.matcher(dataUrodzeniaWczytana).matches()) {
-            	try {
+            	/*try {
             		kot.setBirthDate(sdf.parse(dataUrodzeniaWczytana));
             	} catch (ParseException pe) {
             		System.out.println("Coś jest nie tak z datą! Przykładowa data: 2014.01.05");
-            	}
+            	}*/
             }
         } while (kot.getBirthDate()==null);
         

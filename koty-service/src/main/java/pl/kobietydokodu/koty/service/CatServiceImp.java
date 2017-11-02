@@ -9,11 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import pl.kobietydokodu.koty.dao.CatDAO;
 import pl.kobietydokodu.koty.domain.Cat;
-@Service
-public class CatServiceImp implements CatDAO {
+@Service("CatService")
+public class CatServiceImp implements CatService {
 	
 	@Autowired
-	@Qualifier("jpaKotDAOBean")
+	@Qualifier("jpaKotDAOBean") //jdbcKotDAOBean or jpaKotDAOBean
 	private CatDAO kotDao;
 	
 	@Transactional

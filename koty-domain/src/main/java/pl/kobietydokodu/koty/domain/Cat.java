@@ -1,6 +1,7 @@
 package pl.kobietydokodu.koty.domain;
 
-import java.util.Date;
+import java.sql.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,7 +36,7 @@ public class Cat {
     public void setName(String name) {
         this.name = name;
     }
-
+    
     public Date getBirthDate() {
         return birthDate;
     }

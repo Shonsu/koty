@@ -10,9 +10,13 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+
 import pl.kobietydokodu.koty.dao.CatDAO;
 import pl.kobietydokodu.koty.domain.Cat;
 
+
+@Qualifier("jdbcKotDAOBean")
 public class JdbcCatDAO implements CatDAO {
 
 	Connection conn = null;
