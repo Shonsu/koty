@@ -12,8 +12,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="${bootstrapcss}" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="${jqueryMinJs}"></script>
-
 
 <title>Dodaj kota</title>
 </head>
@@ -88,5 +86,6 @@
 			});
 		</script> -->
 	<script type="text/javascript" src="${bootstrapjs}"></script>
+	<script type="text/javascript" src="${jqueryMinJs}"></script>
 </body>
 </html>

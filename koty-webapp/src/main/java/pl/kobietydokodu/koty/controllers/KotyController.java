@@ -39,12 +39,12 @@ public class KotyController {
 	}
 
 	@RequestMapping(value = "/cats", method = RequestMethod.GET)
-	public String wypisz(Model model) {
+	public String showAllCats(Model model) {
 		model.addAttribute("koty", catService.findAll());
 		return "cats/list";
 	}
 
-	@RequestMapping("/cats/{id}")
+	@RequestMapping(value = "/cats/{id}", method = RequestMethod.GET)
 	public String show(Model model, @PathVariable("id") Integer id) {
 		model.addAttribute("kot", catService.findById(id));
 		return "cats/show";
@@ -98,7 +98,7 @@ public class KotyController {
 			}
 
 			// POST/REDIRECT/GET
-			return "redirect:/show/" + cat.getCustId();
+			return "redirect:/cats/" + cat.getCustId();
 
 			// POST/FORWARD/GET
 			 //return "wypisz";
