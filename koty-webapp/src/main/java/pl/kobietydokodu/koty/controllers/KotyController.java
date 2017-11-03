@@ -6,7 +6,7 @@ import java.util.TimeZone;
 
 //import java.text.SimpleDateFormat;
 
-import javax.servlet.http.HttpServletRequest;
+//import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,61 +33,23 @@ public class KotyController {
 	@Autowired
 	private CatService catService;
 	
-	@RequestMapping("/glowny")
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String glowny() {
-		return "glowny";
+		return "redirect:/cats";
 	}
 
-	@RequestMapping("/wypisz")
+	@RequestMapping(value = "/cats", method = RequestMethod.GET)
 	public String wypisz(Model model) {
 		model.addAttribute("koty", catService.findAll());
-		return "wypisz";
+		return "cats/list";
 	}
 
-	@RequestMapping("/szczegoly/{id}")
-	public String szczegoly(Model model, @PathVariable("id") Integer id) {
+	@RequestMapping("/cats/{id}")
+	public String show(Model model, @PathVariable("id") Integer id) {
 		model.addAttribute("kot", catService.findById(id));
-		return "szczegoly";
+		return "cats/show";
 	}
 
-	@RequestMapping("/dodaj")
-	public String dodajFormularz(HttpServletRequest request, @ModelAttribute("kotDto") @Valid KotDTO kotDto,
-			BindingResult result, final RedirectAttributes redirectAttributes) {
-		
-		if (request.getMethod().equalsIgnoreCase("POST") && !result.hasErrors()) {
-			Cat kot = new Cat();
-			
-		    java.util.Date utilDate = new java.util.Date();
-		    utilDate = kotDto.getBirthDate();
-		    java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-		    
-			kot.setBirthDate(sqlDate);
-			kot.setName(kotDto.getName());
-			kot.setOwner(kotDto.getOwner());
-			kot.setWeight(kotDto.getWeight());
-			// Add message to flash scope
-						redirectAttributes.addFlashAttribute("css", "success");
-						if(kot.isNew()){
-						  redirectAttributes.addFlashAttribute("msg", "Kot dodany pomyślnie!");
-						}else{
-						  redirectAttributes.addFlashAttribute("msg", "Kot zaktualizowany pomyślnie!");
-						}
-			
-			catService.add(kot);
-			return "redirect:/wypisz";
-
-		} else {
-
-			return "dodaj";
-		}
-	}
-	// http://www.mkyong.com/spring-mvc/spring-mvc-form-handling-example/
-	@RequestMapping(value = "/edytuj/{id}", method = RequestMethod.GET)
-	public String edit(Model model, @PathVariable("id") Integer id) {
-		model.addAttribute("kotDto", catService.findById(id));
-		return "edytuj";
-	}
-	
 	// show update form
 	@RequestMapping(value = "/cats/{id}/update", method = RequestMethod.GET)
 	public String showUpdateCatForm(@PathVariable("id") int id, Model model) {
@@ -113,7 +75,6 @@ public class KotyController {
 			return "cats/catform";
 		} else {
 			
-			
 			Cat cat = new Cat();
 			// convert from util (KotDto) to sql date (Cat)
 		    java.util.Date utilDate = new java.util.Date();
@@ -137,7 +98,7 @@ public class KotyController {
 			}
 
 			// POST/REDIRECT/GET
-			return "redirect:/szczegoly/" + cat.getCustId();
+			return "redirect:/show/" + cat.getCustId();
 
 			// POST/FORWARD/GET
 			 //return "wypisz";

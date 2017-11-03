@@ -25,12 +25,12 @@
 	<div class="container">
 		<div class="jumbotron">
 			<h1>Baza kotów</h1>
-			>
+			<p>Spring MVC, JPA, Boostrap, JSTL example based on Cats Database.</p>
 		</div>
 		<div class="row">
 			<div class="col-md-3">
 				<div class="list-group">
-					<a href="wypisz" class="list-group-item list-group-item-action">Lista kotów</a>
+					<a href="cats" class="list-group-item list-group-item-action">Lista kotów</a>
 					<a href="cats/add" class="list-group-item list-group-item-action">Dodaj kota</a>
 				</div>
 			</div>
