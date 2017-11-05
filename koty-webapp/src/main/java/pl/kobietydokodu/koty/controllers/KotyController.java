@@ -40,13 +40,13 @@ public class KotyController {
 
 	@RequestMapping(value = "/cats", method = RequestMethod.GET)
 	public String showAllCats(Model model) {
-		model.addAttribute("koty", catService.findAll());
+		model.addAttribute("cats", catService.findAll());
 		return "cats/list";
 	}
 
 	@RequestMapping(value = "/cats/{id}", method = RequestMethod.GET)
 	public String show(Model model, @PathVariable("id") long id) {
-		model.addAttribute("kot", catService.findById(id));
+		model.addAttribute("cat", catService.findById(id));
 		return "cats/show";
 	}
 
@@ -102,9 +102,6 @@ public class KotyController {
 			// POST/REDIRECT/GET
 			return "redirect:/cats/" + cat.getCustId();
 
-			// POST/FORWARD/GET
-			 //return "wypisz";
-
 		}
 
 	}
@@ -127,4 +124,6 @@ System.out.println("/cats/{id}/delete");
 		
 		return "redirect:/cats";
 	}
+	
+	// http://www.mkyong.com/spring-mvc/spring-mvc-form-handling-example/
 }

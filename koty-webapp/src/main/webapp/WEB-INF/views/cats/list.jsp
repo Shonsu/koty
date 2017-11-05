@@ -52,7 +52,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="element" items="${koty}" varStatus="loop">
+							<c:forEach var="element" items="${cats}" varStatus="loop">
 								<%-- <tr class='clickable-row' data-href='szczegoly/${element.custId}'> --%>
 								<tr>
 									<th scope="row" class="align-middle">${loop.index}/${loop.count}/${element.custId}</th>

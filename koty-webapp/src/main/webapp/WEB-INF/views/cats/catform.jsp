@@ -18,10 +18,10 @@
 <title>
 	<c:choose>
 		<c:when test="${catDto.custId == null}">
-			<h1>Add Cat</h1>
+			Add Cat
 		</c:when>
 		<c:otherwise>
-			<h1>Update Cat</h1>
+			Update Cat
 		</c:otherwise>
 	</c:choose>
 </title>
