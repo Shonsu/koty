@@ -24,7 +24,7 @@ public class CatServiceImp implements CatService {
 
 	@Transactional
 	@Override
-	public Cat findById(Integer id) {
+	public Cat findById(Long id) {
 		// TODO Auto-generated method stub
 		return kotDao.findById(id);
 	}
@@ -44,8 +44,10 @@ public class CatServiceImp implements CatService {
 
 	}
 
+	@Transactional
 	@Override
 	public void delete(Long idKot) {
+		kotDao.delete(idKot);
 		// TODO Auto-generated method stub
 		
 	}

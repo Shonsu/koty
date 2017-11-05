@@ -45,14 +45,14 @@ public class KotyController {
 	}
 
 	@RequestMapping(value = "/cats/{id}", method = RequestMethod.GET)
-	public String show(Model model, @PathVariable("id") Integer id) {
+	public String show(Model model, @PathVariable("id") long id) {
 		model.addAttribute("kot", catService.findById(id));
 		return "cats/show";
 	}
 
 	// show update form
 	@RequestMapping(value = "/cats/{id}/update", method = RequestMethod.GET)
-	public String showUpdateCatForm(@PathVariable("id") int id, Model model) {
+	public String showUpdateCatForm(@PathVariable("id") long id, Model model) {
 		//logger.debug("showUpdateUserForm() : {}", id);
 		Cat cat = catService.findById(id);
 		model.addAttribute("catDto", cat);
@@ -63,6 +63,8 @@ public class KotyController {
 
 	}
 	
+	
+	//update or add Cat
 	@RequestMapping(value = "/cats", method = RequestMethod.POST)
 	public String saveOrUpdate(@ModelAttribute("catDto") @Valid KotDTO catDto,
 			BindingResult result, Model model,
@@ -113,5 +115,16 @@ public class KotyController {
 
 		return "cats/catform";
 
+	}
+	
+	@RequestMapping(value = "/cats/{id}/delete", method = RequestMethod.POST)
+	public String deleteCat(@PathVariable("id") long id, final RedirectAttributes redirectAttributes) {
+System.out.println("/cats/{id}/delete");
+		catService.delete(id);
+		
+		redirectAttributes.addFlashAttribute("css", "success");
+		redirectAttributes.addFlashAttribute("msg", "Cat is deleted!");
+		
+		return "redirect:/cats";
 	}
 }

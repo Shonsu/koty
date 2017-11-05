@@ -39,10 +39,10 @@ public class JpaKotDAO implements CatDAO {
 	}
 
 	@Override
-	public Cat findById(Integer id) {
+	public Cat findById(Long id) {
 		
 		Query query = entityManager.createQuery("SELECT k FROM Cat k WHERE k.custId = :id");
-		query.setParameter("id", Long.valueOf(id));
+		query.setParameter("id", id);
 		Cat kot = null;
 		try {
 			kot = (Cat) query.getSingleResult();
@@ -55,9 +55,8 @@ public class JpaKotDAO implements CatDAO {
 
 	@Override
 	public void edit(Cat kot) {
-		System.out.println("edit query, cust id : " + kot.getCustId());
 		Query query = entityManager.createQuery("UPDATE Cat SET  custId = :custId, birthDate = :birthDate, name = :name, owner = :owner, weight = :weight WHERE custId = :custId");
-		//custId = :custId,	
+
 		query.setParameter("custId", kot.getCustId());
 		query.setParameter("birthDate", kot.getBirthDate());
 		query.setParameter("name", kot.getName());
@@ -72,7 +71,7 @@ public class JpaKotDAO implements CatDAO {
 
 	@Override
 	public void delete(Long idKot) {
-		Query query = entityManager.createQuery("DELETE FROM koty.cat WHERE custId=:id");
+		Query query = entityManager.createQuery("DELETE FROM Cat k WHERE k.custId=:id");
 		query.setParameter("id", idKot).executeUpdate();
 		
 	}
