@@ -6,31 +6,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-<spring:url value="/resources/bootstrap/js/bootstrap.min.js" var="bootstrapjs" />
-<spring:url value="/resources/bootstrap/css/bootstrap.min.css" var="bootstrapcss" />
-<spring:url value="/resources/jquery/jquery-3.2.1.min.js" var="jqueryMinJs" />
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<spring:url value="/resources/bootstrap/css/bootstrap.min.css" var="bootstrapcss" />
 <link href="${bootstrapcss}" rel="stylesheet" type="text/css" />
 
-<c:set var="url">${pageContext.request.requestURL}</c:set>
-<base href="${fn:substring(url, 0, fn:length(url) - fn:length(pageContext.request.requestURI))}${pageContext.request.contextPath}/" />
-<!-- <script>var base = document.getElementsByTagName("base")[0].href;</script> -->
 
-<title>Szczegóły kota</title>
+<title>Cat details</title>
 </head>
 <body>
 	<div class="container">
 		<div class="jumbotron">
-			<h1>Baza kotów</h1>
+			<h1>Cats Database</h1>
 			<p>Spring MVC, JPA, Boostrap, JSTL example based on Cats Database.</p>
 		</div>
 		<div class="row">
 			<div class="col-md-3">
 				<div class="list-group">
-					<a href="cats" class="list-group-item list-group-item-action">Lista kotów</a>
-					<a href="cats/add" class="list-group-item list-group-item-action">Dodaj kota</a>
+					<spring:url value="/" var="catsUrlM" />
+					<spring:url value="/cats/add" var="AddCatUrlM" />
+					<a href="${catsUrlM}" class="list-group-item list-group-item-action">Cats list</a> <a href="${AddCatUrlM}"
+						class="list-group-item list-group-item-action">Add cat</a>
 				</div>
 			</div>
 			<div class="col-md-9">
@@ -42,16 +40,16 @@
 						<strong>${msg}</strong>
 					</div>
 				</c:if>
-				<h4>Szczegóły kota</h4>
+				<h4>Cat details</h4>
 				<div class="container">
 					<table class="table table-sm table-hover">
 						<thead>
 							<tr>
-								<th>#</th>
-								<th>Imię</th>
-								<th>Data urodzenia</th>
-								<th>Waga</th>
-								<th>Imię opiekuna</th>
+								<th>#ID</th>
+								<th>Name</th>
+								<th>Birth Date</th>
+								<th>Weight</th>
+								<th>Owner</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -70,8 +68,10 @@
 			</div>
 		</div>
 	</div>
-
-	<script type="text/javascript" src="${bootstrapjs}"></script>
+	<spring:url value="/resources/jquery/jquery-3.2.1.min.js" var="jqueryMinJs" />
+	<spring:url value="/resources/bootstrap/js/bootstrap.min.js" var="bootstrapjs" />
 	<script type="text/javascript" src="${jqueryMinJs}"></script>
+	<script type="text/javascript" src="${bootstrapjs}"></script>
+
 </body>
 </html>

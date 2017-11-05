@@ -7,31 +7,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-<spring:url value="/resources/bootstrap/js/bootstrap.min.js" var="bootstrapjs" />
-<spring:url value="/resources/bootstrap/css/bootstrap.min.css" var="bootstrapcss" />
-
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<spring:url value="/resources/bootstrap/css/bootstrap.min.css" var="bootstrapcss" />
 <link href="${bootstrapcss}" rel="stylesheet" type="text/css" />
 
-<c:set var="url">${pageContext.request.requestURL}</c:set>
-<base href="${fn:substring(url, 0, fn:length(url) - fn:length(pageContext.request.requestURI))}${pageContext.request.contextPath}/" />
 
-
-<title>Update kota</title>
+<title>
+	<c:choose>
+		<c:when test="${catDto.custId == null}">
+			<h1>Add Cat</h1>
+		</c:when>
+		<c:otherwise>
+			<h1>Update Cat</h1>
+		</c:otherwise>
+	</c:choose>
+</title>
 </head>
 <body>
 	<div class="container">
 		<div class="jumbotron">
-			<h1>Baza kotów</h1>
+			<h1>Cats Database</h1>
 			<p>Spring MVC, JPA, Boostrap, JSTL example based on Cats Database.</p>
 		</div>
 		<div class="row">
 			<div class="col-md-3">
 				<div class="list-group">
-					<a href="cats" class="list-group-item list-group-item-action">Lista kotów</a>
-					<a href="cats/add" class="list-group-item list-group-item-action">Dodaj kota</a>
+					<spring:url value="/" var="catsUrlM" />
+					<spring:url value="/cats/add" var="AddCatUrlM" />
+					<a href="${catsUrlM}" class="list-group-item list-group-item-action">Cats list</a> <a href="${AddCatUrlM}"
+						class="list-group-item list-group-item-action">Add cat</a>
 				</div>
 			</div>
 			<div class="col-md-9">
@@ -113,7 +120,7 @@
 			</div>
 		</div>
 	</div>
-
+	<spring:url value="/resources/bootstrap/js/bootstrap.min.js" var="bootstrapjs" />
 	<script type="text/javascript" src="${bootstrapjs}"></script>
 </body>
 </html>
