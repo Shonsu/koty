@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import pl.kobietydokodu.koty.dao.CatDAO;
 import pl.kobietydokodu.koty.domain.Cat;
+import static java.lang.Math.toIntExact;
 
 @Repository
 public class SimpleKotDAO implements CatDAO{
@@ -21,9 +22,9 @@ public class SimpleKotDAO implements CatDAO{
 		return koty;
 	}
 	
-	public Cat findById(Integer id) {
+	public Cat findById(Long id) {
 		if (id<koty.size()) {
-			return koty.get(id);
+			return koty.get(toIntExact(id));
 		} else {
 			return null;
 		}

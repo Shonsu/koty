@@ -101,7 +101,7 @@ public class JdbcCatDAO implements CatDAO {
 	}
 
 	@Override
-	public Cat findById(Integer id) {
+	public Cat findById(Long id) {
 		String sql = "SELECT * FROM koty_table where CUST_ID = " + id;
 
 		conn = null;
