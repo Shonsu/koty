@@ -116,7 +116,7 @@ public class KotyController {
 	
 	@RequestMapping(value = "/cats/{id}/delete", method = RequestMethod.POST)
 	public String deleteCat(@PathVariable("id") long id, final RedirectAttributes redirectAttributes) {
-System.out.println("/cats/{id}/delete");
+
 		catService.delete(id);
 		
 		redirectAttributes.addFlashAttribute("css", "success");

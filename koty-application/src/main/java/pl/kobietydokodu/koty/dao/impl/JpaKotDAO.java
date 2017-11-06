@@ -23,7 +23,6 @@ public class JpaKotDAO implements CatDAO {
 	
 	@Override
 	public void add(Cat kot) {
-		System.out.println("add query");
 		entityManager.persist(kot);
 		entityManager.flush();
 	}
@@ -63,7 +62,6 @@ public class JpaKotDAO implements CatDAO {
 		query.setParameter("owner", kot.getOwner());
 		query.setParameter("weight", kot.getWeight());
 		query.executeUpdate();
-		//entityManager.flush();
 
 		
 
