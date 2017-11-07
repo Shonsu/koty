@@ -25,31 +25,25 @@ public class CatServiceImp implements CatService {
 	@Transactional
 	@Override
 	public Cat findById(Long id) {
-		// TODO Auto-generated method stub
 		return kotDao.findById(id);
 	}
 
 	@Transactional
 	@Override
 	public void add(Cat kot) {
-		// TODO Auto-generated method stub
 		kotDao.add(kot);
 	}
 
 	@Transactional
 	@Override
 	public void edit(Cat kot) {
-		// TODO Auto-generated method stub
 		kotDao.edit(kot);
-
 	}
 
 	@Transactional
 	@Override
 	public void delete(Long idKot) {
 		kotDao.delete(idKot);
-		// TODO Auto-generated method stub
-		
 	}
 
 }
