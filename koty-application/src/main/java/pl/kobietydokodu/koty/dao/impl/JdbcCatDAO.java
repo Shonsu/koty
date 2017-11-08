@@ -75,7 +75,6 @@ public class JdbcCatDAO implements CatDAO {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				result = new Cat();
-				System.out.println(rs.getString("imie"));
 				result.setCustId(rs.getLong("CUST_ID"));
 				result.setName(rs.getString("imie"));
 				result.setOwner(rs.getString("opiekun"));

@@ -47,7 +47,7 @@
 								<th>Birth Date</th>
 								<th>Weight</th>
 								<th>Owner</th>
-								<th></th>
+								<th>Actions</th>
 
 							</tr>
 						</thead>
