@@ -2,6 +2,8 @@ package pl.kobietydokodu.koty.controllers;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.TimeZone;
 
 //import java.text.SimpleDateFormat;
@@ -88,7 +90,8 @@ public class KotyController {
 		    cat.setName(catDto.getName());
 		    cat.setOwner(catDto.getOwner());
 		    cat.setWeight(catDto.getWeight());
-			
+		    cat.setSex(catDto.getSex());
+		    cat.setColoring(catDto.getColoring());
 			// Add message to flash scope
 			redirectAttributes.addFlashAttribute("css", "success");
 			if(cat.isNew()){
@@ -125,5 +128,22 @@ public class KotyController {
 		return "redirect:/cats";
 	}
 	
+	@ModelAttribute("webColoringList")
+	public List<String> populateWebColoringList() {
+
+		//Data referencing for web framework checkboxes
+		List<String> webColoringList = new ArrayList<String>();
+		webColoringList.add("white");
+		webColoringList.add("black");
+		webColoringList.add("red");
+		webColoringList.add("chocolate");
+		webColoringList.add("blue");
+		webColoringList.add("silver");
+		webColoringList.add("spotted");
+		webColoringList.add("tiger");
+		webColoringList.add("other");
+
+		return webColoringList;
+	}
 	// http://www.mkyong.com/spring-mvc/spring-mvc-form-handling-example/
 }
