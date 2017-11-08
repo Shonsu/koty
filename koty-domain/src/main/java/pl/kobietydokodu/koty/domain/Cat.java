@@ -28,7 +28,9 @@ public class Cat {
     private Date birthDate;
     private Float weight;
     private String owner;
-
+    private String sex;
+    private String coloring;
+    
 	public String getName() {
         return name;
     }
@@ -72,6 +74,22 @@ public class Cat {
 	public boolean isNew() {
 		return (this.custId == null);
 
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public String getColoring() {
+		return coloring;
+	}
+
+	public void setColoring(String coloring) {
+		this.coloring = coloring;
 	}
 
 }

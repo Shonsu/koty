@@ -15,16 +15,14 @@
 <link href="${bootstrapcss}" rel="stylesheet" type="text/css" />
 
 
-<title>
-	<c:choose>
+<title><c:choose>
 		<c:when test="${catDto.custId == null}">
 			Add Cat
 		</c:when>
 		<c:otherwise>
 			Update Cat
 		</c:otherwise>
-	</c:choose>
-</title>
+	</c:choose></title>
 </head>
 <body>
 	<div class="container">
@@ -69,7 +67,7 @@
 							<div class="col-sm-8">
 								<form:input path="name" type="text" class="form-control" id="name" placeholder="Tofik" />
 								<c:if test="${pageContext.request.method=='POST'}">
-									<form:errors path="name" />
+									<form:errors path="name" class="badge badge-pill badge-warning" />
 								</c:if>
 							</div>
 						</div>
@@ -79,7 +77,7 @@
 								<fmt:formatDate value="${catDto.birthDate}" pattern="yyyy-MM-dd" var="formattedDate" />
 								<form:input path="birthDate" type="date" class="form-control" value="${formattedDate}" />
 								<c:if test="${pageContext.request.method=='POST'}">
-									<form:errors path="birthDate" />
+									<form:errors path="birthDate" class="badge badge-pill badge-warning" />
 								</c:if>
 							</div>
 						</div>
@@ -88,33 +86,62 @@
 							<div class="col-sm-8">
 								<form:input path="weight" type="number" min="0" step=".001" class="form-control" id="weight" placeholder="2.000" />
 								<c:if test="${pageContext.request.method=='POST'}">
-									<form:errors path="weight" />
+									<form:errors path="weight" class="badge badge-pill badge-warning" />
 								</c:if>
 							</div>
 						</div>
 						<div class="form-group row">
-							<label class="col-sm-4 col-form-label" for="owner">Imię opiekuna:</label>
-							<div class="col-sm-8">
-								<form:input path="owner" type="text" class="form-control" id="owner" placeholder="Adaś" />
+							<label class="col-sm-4 col-form-label" for="sex">Sex:</label>
+							<div class="col-sm-8 ">
+								<div class="form-check form-check-inline">
+									<label class="form-check-label">
+									 	<form:radiobutton class="form-check-input" path="sex" value="M" /> Male
+									</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<label class="form-check-label">
+									<%-- checked="${catDto.sex == 'M' ? 'checked':''}" --%>
+									 	<form:radiobutton class="form-check-input" path="sex" value="F" /> Female
+									</label>
+								</div>
 								<c:if test="${pageContext.request.method=='POST'}">
-									<form:errors path="owner" />
+									<form:errors path="sex" class="badge badge-pill badge-warning" />
 								</c:if>
 							</div>
-						</div>
-						<div class="form-group row">
-
-							<div class="ml-sm-auto col-sm-8">
-								<c:choose>
-									<c:when test="${catDto.custId==null}">
-										<button type="submit" class="btn-sm btn-primary pull-right">Add</button>
-									</c:when>
-									<c:otherwise>
-										<button type="submit" class="btn-sm btn-primary pull-right">Update</button>
-									</c:otherwise>
-								</c:choose>
 
 							</div>
-						</div>
+							<div class="form-group row">
+								<label class="col-sm-4 col-form-label" for="coloring">Coloring:</label>
+								<div class="col-sm-8">
+									<form:select path="coloring" items="${webColoringList}" multiple="false" size="5" class="form-control" />
+									<c:if test="${pageContext.request.method=='POST'}">
+										<form:errors path="coloring" class="badge badge-pill badge-warning" />
+									</c:if>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-sm-4 col-form-label" for="owner">Imię opiekuna:</label>
+								<div class="col-sm-8">
+									<form:input path="owner" type="text" class="form-control" id="owner" placeholder="Adaś" />
+									<c:if test="${pageContext.request.method=='POST'}">
+										<form:errors path="owner" class="badge badge-pill badge-warning" />
+									</c:if>
+								</div>
+							</div>
+							<div class="form-group row">
+
+								<div class="ml-sm-auto col-sm-8">
+									<c:choose>
+										<c:when test="${catDto.custId==null}">
+											<button type="submit" class="btn-sm btn-primary pull-right">Add</button>
+										</c:when>
+										<c:otherwise>
+											<button type="submit" class="btn-sm btn-primary pull-right">Update</button>
+										</c:otherwise>
+									</c:choose>
+
+								</div>
+							</div>
 					</form:form>
 				</div>
 			</div>

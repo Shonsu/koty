@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class KotDTO {
@@ -31,6 +32,10 @@ public class KotDTO {
     @NotNull(message="Imię nie może być puste")
     @Size(min=3, max=30, message = "Długość musi być od 3 do 30 zanków")
     private String owner;
+    @NotEmpty(message="Please select cat sex")
+    private String sex;
+    @NotEmpty(message="Please choose cat coloring")
+    private String coloring;
 
 	public String getName() {
 		return name;
@@ -70,6 +75,22 @@ public class KotDTO {
 
 	public void setCustId(Long custId) {
 		this.custId = custId;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public String getColoring() {
+		return coloring;
+	}
+
+	public void setColoring(String coloring) {
+		this.coloring = coloring;
 	}
     
     

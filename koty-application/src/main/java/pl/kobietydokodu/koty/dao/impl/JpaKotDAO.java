@@ -54,13 +54,15 @@ public class JpaKotDAO implements CatDAO {
 
 	@Override
 	public void edit(Cat kot) {
-		Query query = entityManager.createQuery("UPDATE Cat SET  custId = :custId, birthDate = :birthDate, name = :name, owner = :owner, weight = :weight WHERE custId = :custId");
+		Query query = entityManager.createQuery("UPDATE Cat SET  custId = :custId, birthDate = :birthDate, name = :name, owner = :owner, weight = :weight, sex = :sex, coloring = :coloring WHERE custId = :custId");
 
 		query.setParameter("custId", kot.getCustId());
 		query.setParameter("birthDate", kot.getBirthDate());
 		query.setParameter("name", kot.getName());
 		query.setParameter("owner", kot.getOwner());
 		query.setParameter("weight", kot.getWeight());
+		query.setParameter("sex", kot.getSex());
+		query.setParameter("coloring", kot.getColoring());
 		query.executeUpdate();
 
 		
