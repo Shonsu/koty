@@ -42,28 +42,26 @@
 				</c:if>
 				<h4>Cat details</h4>
 				<div class="container">
-					<table class="table table-sm table-hover">
-						<thead>
-							<tr>
-								<th>#ID</th>
-								<th>Name</th>
-								<th>Birth Date</th>
-								<th>Weight</th>
-								<th>Owner</th>
-							</tr>
-						</thead>
-						<tbody>
+					<dl class="row">
+						<dt class="col-sm-3">#ID</dt>
+						<dd class="col-sm-9">${cat.custId}</dd>
+						<dt class="col-sm-3">Name</dt>
+						<dd class="col-sm-9">${cat.name}</dd>
+						<dt class="col-sm-3">Birtd Date</dt>
+						<dd class="col-sm-9">
+							<fmt:formatDate pattern="dd.MM.yyyy" value="${cat.birthDate}" />
+						</dd>
+						<dt class="col-sm-3">Weight</dt>
+						<dd class="col-sm-9">${cat.weight}</dd>
+						<dt class="col-sm-3">Sex</dt>
+						<dd class="col-sm-9">${cat.sex}</dd>
+						<dt class="col-sm-3">Coloring</dt>
+						<dd class="col-sm-9">${cat.coloring}</dd>
+						<dt class="col-sm-3">Owner</dt>
+						<dd class="col-sm-9">${cat.owner}</dd>
+					</dl>
 
-							<tr>
-								<th scope="row">${cat.custId}</th>
-								<td>${cat.name}</td>
-								<td><fmt:formatDate pattern="dd.MM.yyyy" value="${cat.birthDate}" /></td>
-								<td>${cat.weight}</td>
-								<td>${cat.owner}</td>
-							</tr>
 
-						</tbody>
-					</table>
 				</div>
 			</div>
 		</div>
