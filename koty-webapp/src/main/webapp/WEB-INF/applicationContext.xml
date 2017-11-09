@@ -9,7 +9,7 @@
  http://www.springframework.org/schema/context 
  http://www.springframework.org/schema/context/spring-context-4.3.xsd
  http://www.springframework.org/schema/data/jpa
- http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+ http://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd
  http://www.springframework.org/schema/tx
  http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
@@ -24,9 +24,7 @@
 			<value>.jsp</value>
 		</property>
 	</bean>
-	<bean id="dataSourceJndi" class="org.springframework.jndi.JndiObjectFactoryBean">
-        <property name="jndiName" value="java:comp/env/jdbc/koty"/>
-    </bean>
+
 	<bean id="myEmf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="packagesToScan" value="pl.kobietydokodu" />
@@ -60,5 +58,6 @@
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<mvc:annotation-driven />
 
-
+	<jpa:repositories base-package="pl.kobietydokodu" entity-manager-factory-ref="myEmf"/>
+	
 </beans>
