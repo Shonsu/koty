@@ -2,9 +2,10 @@
 <Context>
     <Resource
         name="jdbc/koty" type="javax.sql.DataSource"
-        maxActive="100" maxIdle="30" maxWait="10000" 
-        url="jdbc:mysql://localhost:3306/koty"
-        driverClassName="com.mysql.jdbc.Driver"
+        maxTotal="100" maxIdle="30" maxWaitMillis="10000" 
+        url="jdbc:mysql://localhost:3306/koty?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;verifyServerCertificate=false&amp;useSSL=true"
+        driverClassName="com.mysql.cj.jdbc.Driver"
         username="root" password="malinka12"
     />
+    
 </Context>
