@@ -33,7 +33,6 @@ public class JpaKotDAO implements CatDAO {
 		Query query = entityManager.createQuery("SELECT k FROM Cat k");
 		@SuppressWarnings("unchecked")
 		List<Cat> koty = (List<Cat>) query.getResultList();
-		
 		return koty;
 	}
 
@@ -48,7 +47,6 @@ public class JpaKotDAO implements CatDAO {
 		} catch (Exception e) {
 			return kot;
 		}
-		
 		return kot;
 	}
 
@@ -64,7 +62,6 @@ public class JpaKotDAO implements CatDAO {
 		query.setParameter("sex", kot.getSex());
 		query.setParameter("coloring", kot.getColoring());
 		query.executeUpdate();
-
 		
 
 	}
@@ -73,7 +70,6 @@ public class JpaKotDAO implements CatDAO {
 	public void delete(Long idKot) {
 		Query query = entityManager.createQuery("DELETE FROM Cat k WHERE k.custId=:id");
 		query.setParameter("id", idKot).executeUpdate();
-		
 	}
 
 }
