@@ -24,7 +24,9 @@
 			<value>.jsp</value>
 		</property>
 	</bean>
-
+	<bean id="dataSourceJndi" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName" value="jdbc/koty"/>
+    </bean>
 	<bean id="myEmf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="packagesToScan" value="pl.kobietydokodu" />
@@ -57,7 +59,6 @@
 	<mvc:view-controller path="/" view-name="glowny" />
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<mvc:annotation-driven />
-
 
 
 </beans>
