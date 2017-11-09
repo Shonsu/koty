@@ -3,19 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
-<html>
-<head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<jsp:include page="../fragments/header.jsp" />
 
-<spring:url value="/resources/bootstrap/css/bootstrap.min.css" var="bootstrapcss" />
-<link href="${bootstrapcss}" rel="stylesheet" type="text/css" />
-
-
-<title>Cat details</title>
-</head>
 <body>
 	<div class="container">
 		<div class="jumbotron">
@@ -24,12 +14,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-3">
-				<div class="list-group">
-					<spring:url value="/" var="catsUrlM" />
-					<spring:url value="/cats/add" var="AddCatUrlM" />
-					<a href="${catsUrlM}" class="list-group-item list-group-item-action">Cats list</a> <a href="${AddCatUrlM}"
-						class="list-group-item list-group-item-action">Add cat</a>
-				</div>
+				<jsp:include page="../fragments/navbar.jsp" />
 			</div>
 			<div class="col-md-9">
 				<c:if test="${not empty msg}">
