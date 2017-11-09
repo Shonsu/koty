@@ -25,7 +25,7 @@
 		</property>
 	</bean>
 	<bean id="dataSourceJndi" class="org.springframework.jndi.JndiObjectFactoryBean">
-        <property name="jndiName" value="jdbc/koty"/>
+        <property name="jndiName" value="java:comp/env/jdbc/koty"/>
     </bean>
 	<bean id="myEmf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
