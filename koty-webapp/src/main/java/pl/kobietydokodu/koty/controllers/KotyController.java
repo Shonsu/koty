@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import pl.kobietydokodu.koty.dao.CatRepository;
 import pl.kobietydokodu.koty.domain.Cat;
 import pl.kobietydokodu.koty.dto.KotDTO;
+import pl.kobietydokodu.koty.service.JpaRepositoryService;
 
 @Controller
 public class KotyController {
@@ -30,7 +30,7 @@ public class KotyController {
 	  }
 	
 	@Autowired
-	private CatRepository catService;
+	private JpaRepositoryService catService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String glowny() {
@@ -45,7 +45,12 @@ public class KotyController {
 
 	@RequestMapping(value = "/cats/{id}", method = RequestMethod.GET)
 	public String show(Model model, @PathVariable("id") long id) {
-		model.addAttribute("cat", catService.findById(id).get());
+		if(catService.existsById(id)) {
+			model.addAttribute("cat", catService.findById(id).get());
+		}else {
+			model.addAttribute("css", "danger");
+			model.addAttribute("msg", "Cat not found.");
+		}
 		return "cats/show";
 	}
 
@@ -53,12 +58,18 @@ public class KotyController {
 	@RequestMapping(value = "/cats/{id}/update", method = RequestMethod.GET)
 	public String showUpdateCatForm(@PathVariable("id") long id, Model model) {
 		//logger.debug("showUpdateUserForm() : {}", id);
-		Cat cat = catService.findById(id).get();
-		model.addAttribute("catDto", cat);
+		
+		if(catService.existsById(id)) {
+			Cat cat = catService.findById(id).get();
+			model.addAttribute("catDto", cat);
+			return "cats/catform";
+		}else {
 
-		//populateDefaultModel(model);
+			model.addAttribute("css", "danger");
+			model.addAttribute("msg", "Cat not found.");
+			return  "redirect:/cats";
+		}
 
-		return "cats/catform";
 
 	}
 	
@@ -117,10 +128,14 @@ public class KotyController {
 	@RequestMapping(value = "/cats/{id}/delete", method = RequestMethod.POST)
 	public String deleteCat(@PathVariable("id") long id, final RedirectAttributes redirectAttributes) {
 
-		catService.delete(catService.findById(id).get());
-		
-		redirectAttributes.addFlashAttribute("css", "success");
-		redirectAttributes.addFlashAttribute("msg", "Cat is deleted!");
+		if(catService.existsById(id)) {
+			catService.delete(catService.findById(id).get());
+			redirectAttributes.addFlashAttribute("css", "success");
+			redirectAttributes.addFlashAttribute("msg", "Cat is deleted!");
+		}else {
+			redirectAttributes.addAttribute("css", "danger");
+			redirectAttributes.addAttribute("msg", "Cat not found.");
+		}
 		
 		return "redirect:/cats";
 	}

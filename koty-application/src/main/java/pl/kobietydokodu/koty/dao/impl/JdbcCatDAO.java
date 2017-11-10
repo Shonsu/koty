@@ -32,7 +32,7 @@ public class JdbcCatDAO implements CatDAO {
 	}
 
 	@Override
-	public void add(Cat kot) {
+	public Cat add(Cat kot) {
 		String sql = "INSERT INTO koty.koty_table " + "(imie, opiekun, dataUrodzenia, waga) VALUES (?, ?, ?, ?)";
 
 		conn = null;
@@ -48,18 +48,22 @@ public class JdbcCatDAO implements CatDAO {
 			ps.setFloat(4, kot.getWeight());
 			ps.executeUpdate();
 			ps.close();
-
+			return kot;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 
 		} finally {
+			
 			if (conn != null) {
 				try {
 					conn.close();
 				} catch (SQLException e) {
 				}
+				return null;	
 			}
+			
 		}
+		
 	}
 
 	@Override
@@ -136,7 +140,8 @@ public class JdbcCatDAO implements CatDAO {
 	}
 
 	@Override
-	public void edit(Cat kot) {
+	public Cat edit(Cat kot) {
+		return kot;
 		// TODO Auto-generated method stub
 		
 	}

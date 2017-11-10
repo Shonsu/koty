@@ -14,8 +14,9 @@ public class SimpleKotDAO implements CatDAO{
 
 	List<Cat> koty = new ArrayList<Cat>();
 	
-	public void add(Cat kot) {
+	public Cat add(Cat kot) {
 		koty.add(kot);
+		return kot;
 	}
 	
 	public List<Cat> findAll() {
@@ -31,7 +32,8 @@ public class SimpleKotDAO implements CatDAO{
 	}
 
 	@Override
-	public void edit(Cat kot) {
+	public Cat edit(Cat kot) {
+		return kot;
 		// TODO Auto-generated method stub
 		
 	}
