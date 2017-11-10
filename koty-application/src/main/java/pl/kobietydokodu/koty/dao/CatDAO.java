@@ -7,7 +7,7 @@ public interface CatDAO {
 
 	public List<Cat> findAll();
 	public Cat findById(Long id);
-	public void add(Cat kot);
-	public void edit(Cat kot);
+	public Cat add(Cat kot);
+	public Cat edit(Cat kot);
 	public void delete(Long idKot);
 }

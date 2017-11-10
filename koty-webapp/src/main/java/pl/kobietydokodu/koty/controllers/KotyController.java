@@ -6,9 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TimeZone;
 
-//import java.text.SimpleDateFormat;
-
-//import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import pl.kobietydokodu.koty.dao.CatRepository;
 import pl.kobietydokodu.koty.domain.Cat;
 import pl.kobietydokodu.koty.dto.KotDTO;
-import pl.kobietydokodu.koty.service.CatService;
 
 @Controller
 public class KotyController {
@@ -33,7 +30,7 @@ public class KotyController {
 	  }
 	
 	@Autowired
-	private CatService catService;
+	private CatRepository catService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String glowny() {
@@ -48,7 +45,7 @@ public class KotyController {
 
 	@RequestMapping(value = "/cats/{id}", method = RequestMethod.GET)
 	public String show(Model model, @PathVariable("id") long id) {
-		model.addAttribute("cat", catService.findById(id));
+		model.addAttribute("cat", catService.findById(id).get());
 		return "cats/show";
 	}
 
@@ -56,7 +53,7 @@ public class KotyController {
 	@RequestMapping(value = "/cats/{id}/update", method = RequestMethod.GET)
 	public String showUpdateCatForm(@PathVariable("id") long id, Model model) {
 		//logger.debug("showUpdateUserForm() : {}", id);
-		Cat cat = catService.findById(id);
+		Cat cat = catService.findById(id).get();
 		model.addAttribute("catDto", cat);
 
 		//populateDefaultModel(model);
@@ -95,10 +92,10 @@ public class KotyController {
 			// Add message to flash scope
 			redirectAttributes.addFlashAttribute("css", "success");
 			if(cat.isNew()){
-				catService.add(cat);
+				catService.save(cat);
 			  redirectAttributes.addFlashAttribute("msg", "Cat added successfully!");
 			}else{
-				catService.edit(cat);
+				catService.save(cat);
 			  redirectAttributes.addFlashAttribute("msg", "Cat updated successfully!");
 			}
 
@@ -120,7 +117,7 @@ public class KotyController {
 	@RequestMapping(value = "/cats/{id}/delete", method = RequestMethod.POST)
 	public String deleteCat(@PathVariable("id") long id, final RedirectAttributes redirectAttributes) {
 
-		catService.delete(id);
+		catService.delete(catService.findById(id).get());
 		
 		redirectAttributes.addFlashAttribute("css", "success");
 		redirectAttributes.addFlashAttribute("msg", "Cat is deleted!");
