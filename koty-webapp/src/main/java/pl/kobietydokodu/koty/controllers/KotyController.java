@@ -21,10 +21,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.kobietydokodu.koty.domain.Cat;
 import pl.kobietydokodu.koty.dto.KotDTO;
 import pl.kobietydokodu.koty.service.JpaRepositoryService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Controller
 public class KotyController {
-
+	
+	private final Logger logger = LoggerFactory.getLogger(KotyController.class);
+	
 	static {
 	    TimeZone.setDefault(TimeZone.getTimeZone("UTC")); //bez tego data zapisywana w bazie danych była cofnięta o jeden dzień.  
 	  }
@@ -39,12 +43,18 @@ public class KotyController {
 
 	@RequestMapping(value = "/cats", method = RequestMethod.GET)
 	public String showAllCats(Model model) {
+		
+		logger.debug("showAllCats()");
+		
 		model.addAttribute("cats", catService.findAll());
 		return "cats/list";
 	}
 
 	@RequestMapping(value = "/cats/{id}", method = RequestMethod.GET)
-	public String show(Model model, @PathVariable("id") long id) {
+	public String showCat(Model model, @PathVariable("id") long id) {
+		
+		logger.debug("showCat() id: {}", id);
+		
 		if(catService.existsById(id)) {
 			model.addAttribute("cat", catService.findById(id).get());
 		}else {
@@ -57,30 +67,31 @@ public class KotyController {
 	// show update form
 	@RequestMapping(value = "/cats/{id}/update", method = RequestMethod.GET)
 	public String showUpdateCatForm(@PathVariable("id") long id, Model model) {
-		//logger.debug("showUpdateUserForm() : {}", id);
+		
+		logger.debug("showUpdateCatForm() : {}", id);
 		
 		if(catService.existsById(id)) {
 			Cat cat = catService.findById(id).get();
 			model.addAttribute("catDto", cat);
 			return "cats/catform";
 		}else {
-
-			model.addAttribute("css", "danger");
-			model.addAttribute("msg", "Cat not found.");
-			return  "redirect:/cats";
+/*			model.addAttribute("cats", catService.findAll());*/
+/*			model.addAttribute("css", "danger");
+			model.addAttribute("msg", "Cat not found.");*/
+			
 		}
-
+		return  "redirect:/cats";
 
 	}
 	
 	
 	//update or add Cat
 	@RequestMapping(value = "/cats", method = RequestMethod.POST)
-	public String saveOrUpdate(@ModelAttribute("catDto") @Valid KotDTO catDto,
+	public String saveOrUpdateCat(@ModelAttribute("catDto") @Valid KotDTO catDto,
 			BindingResult result, Model model,
 			final RedirectAttributes redirectAttributes) {
 
-		//logger.debug("saveOrUpdateUser() : {}", user);
+		logger.debug("saveOrUpdateCat() : {}", catDto);
 		
 		if (result.hasErrors()) {
 			//populateDefaultModel(model);
@@ -120,14 +131,18 @@ public class KotyController {
 	@RequestMapping(value = "/cats/add", method = RequestMethod.GET)
 	public String showAddCatForm(@ModelAttribute("catDto") @Valid KotDTO catDto,
 			BindingResult result, Model model) {
-
+		
+		logger.debug("showAddCatForm()");
+		
 		return "cats/catform";
 
 	}
 	
 	@RequestMapping(value = "/cats/{id}/delete", method = RequestMethod.POST)
 	public String deleteCat(@PathVariable("id") long id, final RedirectAttributes redirectAttributes) {
-
+		
+		logger.debug("deleteCat() : {}", id);
+		
 		if(catService.existsById(id)) {
 			catService.delete(catService.findById(id).get());
 			redirectAttributes.addFlashAttribute("css", "success");
