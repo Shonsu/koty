@@ -67,10 +67,11 @@ public class KotyController {
 	@RequestMapping(value = "/cats/{id}/update", method = RequestMethod.GET)
 	public String showUpdateCatForm(@PathVariable("id") long id, Model model) {
 
-		logger.debug("showUpdateCatForm() : {}", id);
+		logger.debug("showUpdateCatForm() id: {}", id);
 
 		if (catService.existsById(id)) {
 			Cat cat = catService.findById(id).get();
+			
 			model.addAttribute("catDto", cat);
 			return "cats/catform";
 		} else {
@@ -139,7 +140,7 @@ public class KotyController {
 	@RequestMapping(value = "/cats/{id}/delete", method = RequestMethod.POST)
 	public String deleteCat(@PathVariable("id") long id, final RedirectAttributes redirectAttributes) {
 
-		logger.debug("deleteCat() : {}", id);
+		logger.debug("deleteCat() id: {}", id);
 
 		if (catService.existsById(id)) {
 			catService.delete(catService.findById(id).get());
