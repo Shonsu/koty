@@ -4,13 +4,15 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import pl.kobietydokodu.koty.dao.impl.JdbcCatDAO;
 import pl.kobietydokodu.koty.domain.Cat;
 
 @Service
-public class JdbcCatDAOService {
+@Qualifier("JdbcCatDAOService")
+public class JdbcCatDAOService implements CatService{
 	
 	@Autowired
 	JdbcCatDAO jdbcCatDAO;

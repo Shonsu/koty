@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,7 +12,8 @@ import pl.kobietydokodu.koty.dao.CatRepository;
 import pl.kobietydokodu.koty.domain.Cat;
 
 @Service
-public class JpaRepositoryService {
+@Qualifier("JpaRepositoryService")
+public class JpaRepositoryService implements CatService{
 
 	@Autowired
 	protected CatRepository catRepository;
