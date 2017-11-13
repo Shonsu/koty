@@ -14,38 +14,36 @@ import pl.kobietydokodu.koty.domain.Cat;
 public class JpaRepositoryService {
 
 	@Autowired
-	protected CatRepository catRpository;
+	protected CatRepository catRepository;
 	
 	@Transactional
 	public Cat save(Cat entity) {
-		//Cat c = catRpository.save(entity);
-		//System.out.printf("Cat ID is %d and for returned account ID is %d\n", entity.getCustId(), c.getCustId());
-		return catRpository.save(entity);
+		return catRepository.save(entity);
 	}
 	
 	@Transactional
 	public Optional<Cat> findById(Long id) {
-		return catRpository.findById(id);
+		return catRepository.findById(id);
 	}
 	
 	@Transactional
 	public List<Cat> findAll() {
-		return catRpository.findAll();
+		return catRepository.findAll();
 	}
 	
 	@Transactional
 	public long count() {
-		return catRpository.count();
+		return catRepository.count();
 	}
 	
 	@Transactional
 	public void delete(Cat entity) {
-		catRpository.delete(entity);
+		catRepository.delete(entity);
 	}
 	
 	@Transactional
 	public boolean existsById(Long id) {
-		return catRpository.existsById(id);
+		return catRepository.existsById(id);
 	}
 
 }

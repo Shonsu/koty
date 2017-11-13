@@ -9,25 +9,20 @@ import javax.persistence.Query;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import pl.kobietydokodu.koty.dao.CatDAO;
 import pl.kobietydokodu.koty.domain.Cat;
 
 @Repository
-@Qualifier("jpaKotDAOBean")
-public class JpaKotDAO implements CatDAO {
+@Qualifier("jpaKotDAO")
+public class JpaKotDAO	{
 
 	@PersistenceContext
     private EntityManager entityManager;
-    
-
 	
-	@Override
 	public Cat add(Cat kot) {
 		 entityManager.persist(kot);
 		return kot;
 	}
 
-	@Override
 	public List<Cat> findAll() {
 		
 		Query query = entityManager.createQuery("SELECT k FROM Cat k");
@@ -36,7 +31,6 @@ public class JpaKotDAO implements CatDAO {
 		return koty;
 	}
 
-	@Override
 	public Cat findById(Long id) {
 		
 		Query query = entityManager.createQuery("SELECT k FROM Cat k WHERE k.custId = :id");
@@ -50,7 +44,6 @@ public class JpaKotDAO implements CatDAO {
 		return kot;
 	}
 
-	@Override
 	public Cat edit(Cat kot) {
 		Query query = entityManager.createQuery("UPDATE Cat SET  custId = :custId, birthDate = :birthDate, name = :name, owner = :owner, weight = :weight, sex = :sex, coloring = :coloring WHERE custId = :custId");
 
@@ -67,10 +60,21 @@ public class JpaKotDAO implements CatDAO {
 
 	}
 
-	@Override
-	public void delete(Long idKot) {
+	public void delete(Cat kot) {
+		
 		Query query = entityManager.createQuery("DELETE FROM Cat k WHERE k.custId=:id");
-		query.setParameter("id", idKot).executeUpdate();
+		query.setParameter("id", kot.getCustId()).executeUpdate();
 	}
+	
+	public boolean existsById(Long id) {
+		
+		Query query = entityManager.createQuery("SELECT COUNT(b.id) FROM Cat b WHERE b.custId=:custId");
+		query.setParameter("custId", id);
+		Long count = (Long) query.getSingleResult();
+		
+		return count<1?false:true;
+	}
+
+
 
 }

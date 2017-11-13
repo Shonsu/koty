@@ -4,21 +4,22 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import pl.kobietydokodu.koty.dao.CatDAO;
 import pl.kobietydokodu.koty.domain.Cat;
 
 @Repository
 @Qualifier("jdbcKotDAOBean")
-public class JdbcCatDAO implements CatDAO {
+public class JdbcCatDAO {
 
 	Connection conn = null;
 	List<Cat> koty;
@@ -31,7 +32,6 @@ public class JdbcCatDAO implements CatDAO {
 		this.dataSource = dataSource;
 	}
 
-	@Override
 	public Cat add(Cat kot) {
 		String sql = "INSERT INTO koty.koty_table " + "(imie, opiekun, dataUrodzenia, waga) VALUES (?, ?, ?, ?)";
 
@@ -39,34 +39,45 @@ public class JdbcCatDAO implements CatDAO {
 
 		try {
 			conn = dataSource.getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql);
+			PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			// ps.setInt(1, kot.getCustId());
 			ps.setString(1, kot.getName());
 			ps.setString(2, kot.getOwner());
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			ps.setString(3, sdf.format(kot.getBirthDate()));
 			ps.setFloat(4, kot.getWeight());
-			ps.executeUpdate();
+			int affectedRows = ps.executeUpdate();
+
+			if (affectedRows == 0) {
+				throw new SQLException("Creating cat failed, no rows affected.");
+			}
+
+			try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
+				if (generatedKeys.next()) {
+					kot.setCustId(generatedKeys.getLong(1));
+				} else {
+					throw new SQLException("Creating cat failed, no ID obtained.");
+				}
+			}
 			ps.close();
 			return kot;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 
 		} finally {
-			
+
 			if (conn != null) {
 				try {
 					conn.close();
 				} catch (SQLException e) {
 				}
-				return null;	
+				return null;
 			}
-			
+
 		}
-		
+
 	}
 
-	@Override
 	public List<Cat> findAll() {
 		String sql = "SELECT * FROM koty.koty_table";
 
@@ -104,7 +115,6 @@ public class JdbcCatDAO implements CatDAO {
 
 	}
 
-	@Override
 	public Cat findById(Long id) {
 		String sql = "SELECT * FROM koty_table where CUST_ID = " + id;
 
@@ -139,17 +149,19 @@ public class JdbcCatDAO implements CatDAO {
 		}
 	}
 
-	@Override
 	public Cat edit(Cat kot) {
-		return kot;
+		return null;
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	@Override
-	public void delete(Long idKot) {
+	public void delete(Cat kot) {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	public boolean existsById(Long id) {
+		return true;
 	}
 
 }
