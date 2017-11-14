@@ -22,8 +22,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.kobietydokodu.koty.domain.Cat;
 import pl.kobietydokodu.koty.dto.KotDTO;
 import pl.kobietydokodu.koty.service.CatService;
-import pl.kobietydokodu.koty.service.JdbcCatDAOService;
-import pl.kobietydokodu.koty.service.JpaRepositoryService;
 
 @Controller
 public class KotyController {
