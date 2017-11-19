@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /* for jdbc
  * use koty;
@@ -25,6 +27,7 @@ public class Cat {
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private Long custId;
     private String name;
+    @Temporal(TemporalType.DATE)
     private Date birthDate;
     private Float weight;
     private String owner;

@@ -174,4 +174,9 @@ public class KotyController {
 		return webColoringList;
 	}
 	// http://www.mkyong.com/spring-mvc/spring-mvc-form-handling-example/
+
+	// http://javasampleapproach.com/java-integration/integrate-jquery-ajax-post-get-spring-boot-web-service
+	// https://stackoverflow.com/questions/9671640/spring-3-mvc-one-to-many-within-a-dynamic-form-add-remove-on-create-update
+	//http://javasampleapproach.com/frontend/jquery-ajax-put-nested-objects-springboot-server-bootstrap
+	//http://javasampleapproach.com/frontend/jquery-ajax-post-get-nested-objects-springboot-server
 }
