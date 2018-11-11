@@ -27,7 +27,7 @@ public class Cat {
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private Long custId;
     private String name;
-    @Temporal(TemporalType.DATE)
+    //@Temporal(TemporalType.DATE)
     private Date birthDate;
     private Float weight;
     private String owner;
